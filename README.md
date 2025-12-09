@@ -1,73 +1,40 @@
-# React + TypeScript + Vite
+# ElastiX — Prototype: Price Elasticity in RFM Segments
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Short description
+ElastiX is a lightweight frontend prototype to explore price elasticity per RFM customer segments. It visualizes segment-product relations and supports interactive "what-if" price simulations. Backend (FastAPI) is assumed separate.
 
-Currently, two official plugins are available:
+Status
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Frontend scaffold ready (React + TypeScript, Vite). Core grid/chart components implemented.
+- Backend integration pending — mock responses recommended for local work.
 
-## React Compiler
+Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Frontend: React, TypeScript, Vite
+- State/API: Redux Toolkit + RTK Query
+- UI: AG Grid, AG Charts
+- Backend (separate): FastAPI, PostgreSQL
 
-## Expanding the ESLint configuration
+Quickstart
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. git clone https://github.com/Mert-55/elastix.git
+2. cd elastix/frontend
+3. npm install
+4. npm run dev (open http://localhost:5173)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Expected backend endpoints
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- GET /elasticity — list elasticity results (stock_code, elasticity, r_squared, sample_size, avg_price, total_quantity)
+- POST /simulate — simulate impact for { stock_code, price_change_percent }
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Next steps
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Finalize API contracts and integrate
+- Complete simulator logic and error handling
+- Add tests and UX polish
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Author / Contact
+Maintainer: @Mert-55 — open an issue or PR for questions.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+License
+See LICENSE (or default to MIT-like for the prototype).
