@@ -1,2 +1,2 @@
-export { default as Dashboard } from './Dashboard';
+export { default as BaseDashboard } from './BaseDashboard';
 export { default as Sidebar } from './sidebar/Sidebar';
