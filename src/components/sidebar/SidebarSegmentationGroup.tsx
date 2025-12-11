@@ -14,11 +14,11 @@ const segmentationLabel = 'dashboard.sidebar.segmentation.label';
 
 const segmentationItems: GroupItems = [
   {
-    title: 'dashboard.sidebar.segmentation.rfm.title',
-    icon: 'customer-segmentation',
+    title: 'dashboard.segmentation.rfm.title',
+    icon: 'elasticity-segmentation',
   },
   {
-    title: 'dashboard.sidebar.segmentation.elasticity.title',
-    icon: 'elasticity-segmentation',
+    title: 'dashboard.segmentation.customer.title',
+    icon: 'customer-segmentation',
   },
 ];
