@@ -1,6 +1,7 @@
-import { BaseDashboard, Sidebar } from '@/components';
-import { SidebarProvider } from '@/components/ui/sidebar';
-import { DashboardIds } from '@/types/DashboardIds';
+import { DashboardIds } from '@/common/types/DashboardIds';
+import { SidebarProvider } from '@/common/ui/sidebar';
+import { BaseDashboard } from '@/stories/dashboard/components';
+import { Sidebar } from '@/stories/sidebar/components';
 
 export default function DashboardPage() {
   return (

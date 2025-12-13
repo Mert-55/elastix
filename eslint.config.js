@@ -1,12 +1,12 @@
 import js from '@eslint/js';
-import globals from 'globals';
+import prettierConfig from 'eslint-config-prettier';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from 'typescript-eslint';
-import { defineConfig, globalIgnores } from 'eslint/config';
-import prettierConfig from 'eslint-config-prettier';
-import unusedImports from 'eslint-plugin-unused-imports';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import unusedImports from 'eslint-plugin-unused-imports';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -40,6 +40,33 @@ export default defineConfig([
       ],
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['../**/app/*', '../**/app/*'],
+              message:
+                'Use @/app/* alias instead of relative imports for app layer.',
+            },
+            {
+              group: ['../**/common/*', '../**/common/*'],
+              message:
+                'Use @/common/* alias instead of relative imports for common layer.',
+            },
+            {
+              group: ['../**/stories/*', '../**/stories/*'],
+              message:
+                'Use @/stories/* alias instead of relative imports for stories layer.',
+            },
+            {
+              group: ['../**/pages/*', '../**/pages/*'],
+              message:
+                'Use @/pages/* alias instead of relative imports for pages.',
+            },
+          ],
+        },
+      ],
     },
   },
 ]);

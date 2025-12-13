@@ -3,9 +3,9 @@ import './index.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import App from './App.tsx';
-import { I18nProvider, ThemeProvider } from '@/providers';
-import { TooltipProvider } from '@/components/ui/tooltip.tsx';
+import App from '@/app/App.tsx';
+import { I18nProvider, ThemeProvider } from '@/app/providers';
+import { TooltipProvider } from '@/common/ui/tooltip.tsx';
 import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
