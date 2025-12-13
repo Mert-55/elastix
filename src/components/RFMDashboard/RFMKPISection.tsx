@@ -15,12 +15,12 @@ export default function RFMKPISection({ segmentName }: RFMKPISectionProps) {
   return (
     <Accordion
       type="multiple"
-      className="col-span-4 row-span-1"
+      className="md:col-span-4 min-h-0"
       defaultValue={['item-kpi']}
     >
       <RFMAccordionSection
         value="item-kpi"
-        titleId="rfm-dashboard.accordion.kpi.title"
+        titleId="rfm.accordion.kpi.title"
         titleValues={{ segment: segmentName ?? '' }}
       >
         <SegmentKPIOverview activeSegmentId={activeSegment} />

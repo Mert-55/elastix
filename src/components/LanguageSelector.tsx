@@ -34,7 +34,7 @@ export function LanguageSelector() {
       value={locale}
       onValueChange={(value) => setLocale(value as Locale)}
     >
-      <SelectTrigger className="w-[160px]">
+      <SelectTrigger className="w-[160px] overflow-hidden md:inline-flex hidden">
         <SelectValue>
           <LocaleOption locale={locale} />
         </SelectValue>

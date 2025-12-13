@@ -25,18 +25,20 @@ export function DashboardHeader({ activeDashboard }: DashboardHeaderProps) {
   );
 
   const PreferenceMenu = () => (
-    <div className="inline-flex gap-4">
+    <div className="flex inline-flex gap-4">
       <LanguageSelector />
       <ThemeToggle />
     </div>
   );
 
   return (
-    <header className="flex w-full px-4 py-3 border-b mx-auto justify-center">
+    <header
+      className={'col-span-1 w-full px-4 py-3 border-b px-auto items-center'}
+    >
       <div
         className={cn(
           tokens.dashboardMaxWidth,
-          'flex w-full justify-between  items-baseline'
+          'flex w-full justify-between items-baseline mx-auto'
         )}
       >
         <SidebarControllMenu />

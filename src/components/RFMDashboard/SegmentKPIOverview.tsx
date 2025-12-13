@@ -5,6 +5,7 @@ import type {
 } from '@/types/RFMSegmentKPIData';
 import { RFMSegmentIds } from '@/types/RFMSegmentId';
 import { cn } from '@/lib/utils';
+import { useFormatText } from '@/hooks/useFormatText';
 import KPIRadialGauge from './KPIRadialGauge';
 import { ScrollArea, ScrollBar } from '../ui/scroll-area';
 
@@ -95,10 +96,11 @@ export default function SegmentKPIOverview({
   }
 
   // Labels für die KPI-Anzeige
-  // TODO: i18n-Keys hinzufügen wenn verfügbar
-  const priceSensitivityLabel = 'Price Sensitivity';
-  const walletShareLabel = 'Wallet Share';
-  const churnRiskLabel = 'Churn Risk';
+  const priceSensitivityLabel = useFormatText({
+    id: 'rfm.kpi.priceSensitivity.label',
+  });
+  const walletShareLabel = useFormatText({ id: 'rfm.kpi.walletShare.label' });
+  const churnRiskLabel = useFormatText({ id: 'rfm.kpi.churnRisk.label' });
 
   return (
     <ScrollArea

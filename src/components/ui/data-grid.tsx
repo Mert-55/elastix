@@ -4,32 +4,6 @@ import { themeQuartz } from 'ag-grid-community';
 import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
-/**
- * AG Grid Theme das unsere CSS-Variablen nutzt
- * Funktioniert automatisch mit Light/Dark Mode
- */
-const lightTheme = themeQuartz.withParams({
-  accentColor: 'var(--primary)',
-  backgroundColor: 'var(--card)',
-  browserColorScheme: 'light',
-  chromeBackgroundColor: 'var(--muted)',
-  foregroundColor: 'var(--foreground)',
-  headerFontSize: 14,
-  oddRowBackgroundColor: 'var(--muted)',
-  borderColor: 'var(--border)',
-});
-
-const darkTheme = themeQuartz.withParams({
-  accentColor: 'var(--primary)',
-  backgroundColor: 'var(--card)',
-  browserColorScheme: 'dark',
-  chromeBackgroundColor: 'var(--muted)',
-  foregroundColor: 'var(--foreground)',
-  headerFontSize: 14,
-  oddRowBackgroundColor: 'var(--muted)',
-  borderColor: 'var(--border)',
-});
-
 export interface DataGridProps<TData> extends Omit<
   AgGridReactProps<TData>,
   'theme'
@@ -46,19 +20,22 @@ export interface DataGridProps<TData> extends Omit<
  */
 export default function DataGrid<TData>({
   className,
-  height = 400,
   rowData,
   columnDefs,
   defaultColDef,
   ...props
 }: DataGridProps<TData>) {
-  // Detect dark mode
-  const isDarkMode = useMemo(() => {
-    if (typeof window === 'undefined') return false;
-    return document.documentElement.classList.contains('dark');
-  }, []);
-
-  const theme = isDarkMode ? darkTheme : lightTheme;
+  const theme = themeQuartz.withParams({
+    accentColor: 'var(--primary)',
+    backgroundColor: 'var(--muted-item)',
+    browserColorScheme: 'light',
+    chromeBackgroundColor: 'var(--muted-item)',
+    foregroundColor: 'var(--foreground)',
+    headerFontSize: 14,
+    headerBackgroundColor: 'var(--muted-item)',
+    borderColor: 'transparent',
+    wrapperBorderRadius: 'var(--radius-md)',
+  });
 
   const mergedDefaultColDef = useMemo(
     () => ({
@@ -71,10 +48,7 @@ export default function DataGrid<TData>({
   );
 
   return (
-    <div
-      className={cn('w-full rounded-md overflow-hidden', className)}
-      style={{ height }}
-    >
+    <div className={cn('w-full min-h-0 max-h-full h-[400px]', className)}>
       <AgGridReact<TData>
         theme={theme}
         rowData={rowData}

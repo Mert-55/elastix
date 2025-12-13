@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import type { ColDef, ICellRendererParams } from 'ag-grid-community';
 import DataGrid from '../ui/data-grid';
+import { useFormatText } from '@/hooks/useFormatText';
 import type {
   OpportunityMatrixItem,
   ElasticityType,
@@ -85,10 +86,30 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     recommendation: 'hold',
     segmentId: RFMSegmentIds.Champion,
   },
+  {
+    id: '8',
+    itemName: 'Premium Organic Coffee',
+    elasticity: -0.4,
+    elasticityType: 'inelastic',
+    purchaseFrequency: 12,
+    revenuePotential: 8.5,
+    recommendation: 'increase',
+    segmentId: RFMSegmentIds.Champion,
+  },
+  {
+    id: '9',
+    itemName: 'Premium Organic Coffee',
+    elasticity: -0.4,
+    elasticityType: 'inelastic',
+    purchaseFrequency: 12,
+    revenuePotential: 8.5,
+    recommendation: 'increase',
+    segmentId: RFMSegmentIds.Champion,
+  },
 
   // Loyal Customers
   {
-    id: '8',
+    id: '10',
     itemName: 'Whole Grain Pasta',
     elasticity: -0.5,
     elasticityType: 'inelastic',
@@ -98,7 +119,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     segmentId: RFMSegmentIds.LoyalCustomers,
   },
   {
-    id: '9',
+    id: '11',
     itemName: 'Greek Yogurt',
     elasticity: -0.6,
     elasticityType: 'inelastic',
@@ -108,7 +129,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     segmentId: RFMSegmentIds.LoyalCustomers,
   },
   {
-    id: '10',
+    id: '12',
     itemName: 'Almond Butter',
     elasticity: -0.7,
     elasticityType: 'inelastic',
@@ -118,7 +139,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     segmentId: RFMSegmentIds.LoyalCustomers,
   },
   {
-    id: '11',
+    id: '13',
     itemName: 'Fresh Berries Mix',
     elasticity: -1.3,
     elasticityType: 'elastic',
@@ -130,7 +151,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
 
   // Potential Loyalists
   {
-    id: '12',
+    id: '14',
     itemName: 'Sparkling Water',
     elasticity: -0.9,
     elasticityType: 'inelastic',
@@ -140,7 +161,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     segmentId: RFMSegmentIds.PotentialLoyalists,
   },
   {
-    id: '13',
+    id: '15',
     itemName: 'Granola Bars',
     elasticity: -1.1,
     elasticityType: 'elastic',
@@ -150,7 +171,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     segmentId: RFMSegmentIds.PotentialLoyalists,
   },
   {
-    id: '14',
+    id: '16',
     itemName: 'Protein Powder',
     elasticity: -0.8,
     elasticityType: 'inelastic',
@@ -162,7 +183,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
 
   // At Risk
   {
-    id: '15',
+    id: '17',
     itemName: 'Budget Rice',
     elasticity: -1.5,
     elasticityType: 'elastic',
@@ -172,7 +193,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     segmentId: RFMSegmentIds.AtRisk,
   },
   {
-    id: '16',
+    id: '18',
     itemName: 'Store Brand Cereal',
     elasticity: -1.8,
     elasticityType: 'elastic',
@@ -182,7 +203,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     segmentId: RFMSegmentIds.AtRisk,
   },
   {
-    id: '17',
+    id: '19',
     itemName: 'Frozen Pizza',
     elasticity: -1.4,
     elasticityType: 'elastic',
@@ -194,7 +215,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
 
   // Hibernating
   {
-    id: '18',
+    id: '20',
     itemName: 'Instant Noodles',
     elasticity: -2.0,
     elasticityType: 'elastic',
@@ -204,7 +225,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     segmentId: RFMSegmentIds.Hibernating,
   },
   {
-    id: '19',
+    id: '21',
     itemName: 'Canned Soup',
     elasticity: -1.6,
     elasticityType: 'elastic',
@@ -216,7 +237,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
 
   // Lost
   {
-    id: '20',
+    id: '22',
     itemName: 'Generic Cola',
     elasticity: -2.5,
     elasticityType: 'elastic',
@@ -226,7 +247,7 @@ const mockOpportunityData: OpportunityMatrixItem[] = [
     segmentId: RFMSegmentIds.Lost,
   },
   {
-    id: '21',
+    id: '23',
     itemName: 'Budget Chips',
     elasticity: -2.2,
     elasticityType: 'elastic',
@@ -269,24 +290,34 @@ function RecommendationBadge({
 }: {
   recommendation: PriceRecommendation;
 }) {
+  const increaseLabel = useFormatText({
+    id: 'rfm.opportunity.recommendation.increase',
+  });
+  const holdLabel = useFormatText({
+    id: 'rfm.opportunity.recommendation.hold',
+  });
+  const discountLabel = useFormatText({
+    id: 'rfm.opportunity.recommendation.discount',
+  });
+
   const config: Record<
     PriceRecommendation,
     { label: string; className: string; icon: string }
   > = {
     increase: {
-      label: 'Preis erhöhen',
+      label: increaseLabel ?? 'Increase Price',
       className:
         'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
       icon: '↑',
     },
     hold: {
-      label: 'Preis halten',
+      label: holdLabel ?? 'Hold Price',
       className:
         'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
       icon: '→',
     },
     discount: {
-      label: 'Rabattieren',
+      label: discountLabel ?? 'Discount',
       className:
         'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
       icon: '↓',
@@ -336,18 +367,36 @@ export default function OpportunityMatrix({
       .sort((a, b) => b.revenuePotential - a.revenuePotential);
   }, [activeSegmentId]);
 
+  // Localized column headers
+  const itemNameLabel =
+    useFormatText({ id: 'rfm.opportunity.column.itemName' }) ?? 'Item Name';
+  const elasticityLabel =
+    useFormatText({ id: 'rfm.opportunity.column.elasticity' }) ??
+    'Price Elasticity (ε)';
+  const purchaseFrequencyLabel =
+    useFormatText({ id: 'rfm.opportunity.column.purchaseFrequency' }) ??
+    'Purchase Frequency';
+  const revenuePotentialLabel =
+    useFormatText({ id: 'rfm.opportunity.column.revenuePotential' }) ??
+    'Revenue Potential';
+  const recommendationLabel =
+    useFormatText({ id: 'rfm.opportunity.column.recommendation' }) ??
+    'Recommendation';
+  const perMonthFormat =
+    useFormatText({ id: 'rfm.opportunity.format.perMonth' }) ?? 'x / Month';
+
   // Spalten-Definition
   const columnDefs = useMemo<ColDef<OpportunityMatrixItem>[]>(
     () => [
       {
         field: 'itemName',
-        headerName: 'Item Name',
+        headerName: itemNameLabel,
         flex: 2,
         minWidth: 180,
       },
       {
         field: 'elasticity',
-        headerName: 'Preiselastizität (ε)',
+        headerName: elasticityLabel,
         flex: 1,
         minWidth: 150,
         cellRenderer: (params: ICellRendererParams<OpportunityMatrixItem>) => {
@@ -362,14 +411,14 @@ export default function OpportunityMatrix({
       },
       {
         field: 'purchaseFrequency',
-        headerName: 'Kaufhäufigkeit',
+        headerName: purchaseFrequencyLabel,
         flex: 1,
         minWidth: 120,
-        valueFormatter: (params) => `${params.value}x / Monat`,
+        valueFormatter: (params) => `${params.value}${perMonthFormat}`,
       },
       {
         field: 'revenuePotential',
-        headerName: 'Umsatzpotenzial',
+        headerName: revenuePotentialLabel,
         flex: 1,
         minWidth: 130,
         sort: 'desc',
@@ -388,7 +437,7 @@ export default function OpportunityMatrix({
       },
       {
         field: 'recommendation',
-        headerName: 'Empfehlung',
+        headerName: recommendationLabel,
         flex: 1,
         minWidth: 140,
         cellRenderer: (params: ICellRendererParams<OpportunityMatrixItem>) => {
@@ -399,7 +448,14 @@ export default function OpportunityMatrix({
         },
       },
     ],
-    []
+    [
+      itemNameLabel,
+      elasticityLabel,
+      purchaseFrequencyLabel,
+      revenuePotentialLabel,
+      recommendationLabel,
+      perMonthFormat,
+    ]
   );
 
   if (!activeSegmentId) {
@@ -407,17 +463,18 @@ export default function OpportunityMatrix({
   }
 
   return (
-    <DataGrid<OpportunityMatrixItem>
-      className={className}
-      height={350}
-      rowData={filteredData}
-      columnDefs={columnDefs}
-      defaultColDef={{
-        sortable: true,
-        resizable: true,
-      }}
-      rowSelection="single"
-      suppressCellFocus
-    />
+    <div className={cn('h-full', className)}>
+      <DataGrid<OpportunityMatrixItem>
+        rowData={filteredData}
+        columnDefs={columnDefs}
+        domLayout="normal"
+        defaultColDef={{
+          sortable: true,
+          resizable: true,
+        }}
+        rowSelection="single"
+        suppressCellFocus
+      />
+    </div>
   );
 }

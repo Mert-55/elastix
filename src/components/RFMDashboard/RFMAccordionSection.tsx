@@ -21,8 +21,6 @@ export interface RFMAccordionSectionProps extends Omit<
   titleValues?: Record<string, string | number>;
   /** Inhalt des Accordion Panels */
   children: ReactNode;
-  /** Zusätzliche CSS-Klassen für den Content-Bereich */
-  contentClassName?: string;
 }
 
 /**
@@ -34,18 +32,21 @@ export default function RFMAccordionSection({
   titleId,
   titleValues,
   children,
-  contentClassName,
   className,
   ...props
 }: RFMAccordionSectionProps) {
   const title = useFormatText({ id: titleId, values: titleValues });
 
   return (
-    <AccordionItem value={value} className={className} {...props}>
+    <AccordionItem
+      value={value}
+      className={cn('flex h-full flex-col', className)}
+      {...props}
+    >
       <AccordionTrigger className="text-base font-semibold tracking-tight">
         {title}
       </AccordionTrigger>
-      <AccordionContent className={cn('flex flex-col gap-4', contentClassName)}>
+      <AccordionContent className={'overflow-hidden'}>
         {children}
       </AccordionContent>
     </AccordionItem>
