@@ -19,12 +19,12 @@ export function RFMSimulationActionItem() {
       <ItemContent>
         <ItemTitle>
           {useFormatText({
-            id: 'rfm-dashboard.accordion.action.item.simulation.title',
+            id: 'rfm.accordion.action.simulation.title',
           })}
         </ItemTitle>
         <ItemDescription>
           {useFormatText({
-            id: 'rfm-dashboard.accordion.action.item.simulation.description',
+            id: 'rfm.accordion.action.simulation.description',
           })}
         </ItemDescription>
       </ItemContent>

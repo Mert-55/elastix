@@ -8,10 +8,7 @@ export default function SegmentToggleGroup({
   ...base
 }: Omit<ToggleGroupSingleProps, 'type'>) {
   return (
-    <ScrollArea
-      className="w-full rounded-md border whitespace-nowrap bg-card/10 "
-      type="always"
-    >
+    <ScrollArea className="w-full rounded-md whitespace-nowrap" type="always">
       <ToggleGroup
         type="single"
         orientation="horizontal"
@@ -21,27 +18,27 @@ export default function SegmentToggleGroup({
       >
         <SegmentToggleGroupItem
           segmentId={RFMSegmentIds.Champion}
-          icon="customer-segmentation"
+          icon="star"
         />
         <SegmentToggleGroupItem
           segmentId={RFMSegmentIds.LoyalCustomers}
-          icon="customer-segmentation"
+          icon="heart"
         />
         <SegmentToggleGroupItem
           segmentId={RFMSegmentIds.PotentialLoyalists}
-          icon="customer-segmentation"
+          icon="bow-arrow"
         />
         <SegmentToggleGroupItem
           segmentId={RFMSegmentIds.AtRisk}
-          icon="customer-segmentation"
+          icon="shield-alert"
         />
         <SegmentToggleGroupItem
           segmentId={RFMSegmentIds.Hibernating}
-          icon="customer-segmentation"
+          icon="moon"
         />
         <SegmentToggleGroupItem
           segmentId={RFMSegmentIds.Lost}
-          icon="customer-segmentation"
+          icon="heart-off"
         />
       </ToggleGroup>
       <ScrollBar orientation="horizontal" />

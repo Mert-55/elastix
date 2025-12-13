@@ -13,28 +13,30 @@ export default function RFMActionsSegmentsSection() {
   return (
     <Accordion
       type="multiple"
-      className="col-span-3 row-span-1"
       defaultValue={['item-actions', 'item-segments']}
+      className="md:col-span-3"
     >
-      <RFMAccordionSection
-        value="item-actions"
-        titleId="rfm-dashboard.accordion.action.title"
-      >
-        <RFMSimulationActionItem />
-      </RFMAccordionSection>
+      <div>
+        <RFMAccordionSection
+          value="item-actions"
+          titleId="rfm.accordion.action.title"
+        >
+          <RFMSimulationActionItem />
+        </RFMAccordionSection>
 
-      <RFMAccordionSection
-        value="item-segments"
-        titleId="rfm-dashboard.accordion.segments.title"
-      >
-        <SegmentToggleGroup
-          defaultValue={activeSegment}
-          onValueChange={(val) => {
-            if (!val) return;
-            setActiveSegment(val as RFMSegmentIds);
-          }}
-        />
-      </RFMAccordionSection>
+        <RFMAccordionSection
+          value="item-segments"
+          titleId="rfm.accordion.segments.title"
+        >
+          <SegmentToggleGroup
+            value={activeSegment}
+            onValueChange={(val) => {
+              if (!val) return;
+              setActiveSegment(val as RFMSegmentIds);
+            }}
+          />
+        </RFMAccordionSection>
+      </div>
     </Accordion>
   );
 }

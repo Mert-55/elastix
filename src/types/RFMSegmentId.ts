@@ -1,8 +1,8 @@
 export enum RFMSegmentIds {
-  Champion = 'rfm-dashboard.accordion.segments.champion',
-  LoyalCustomers = 'rfm-dashboard.accordion.segments.loyal',
-  PotentialLoyalists = 'rfm-dashboard.accordion.segments.potential',
-  AtRisk = 'rfm-dashboard.accordion.segments.at-risk',
-  Hibernating = 'rfm-dashboard.accordion.segments.hibernating',
-  Lost = 'rfm-dashboard.accordion.segments.lost',
+  Champion = 'rfm.segment.champion',
+  LoyalCustomers = 'rfm.segment.loyal',
+  PotentialLoyalists = 'rfm.segment.potential',
+  AtRisk = 'rfm.segment.at-risk',
+  Hibernating = 'rfm.segment.hibernating',
+  Lost = 'rfm.segment.lost',
 }

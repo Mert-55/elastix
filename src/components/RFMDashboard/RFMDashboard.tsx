@@ -14,18 +14,15 @@ export default function RFMDashboard() {
     <main
       className={cn(
         tokens.dashboardMaxWidth,
-        'w-full px-6 grid grid-flow-row-dense grid-cols-7 gap-6 items-start mx-auto'
+        'w-full h-full mx-auto px-6 pb-6 grid grid-flow-row-dense md:grid-cols-subgrid md:grid-rows-[auto_minmax(0,1fr)_minmax(0,1fr)] md:grid-cols-7 gap-4 md:overflow-hidden' //'h-full w-full px-6 pb-6 mx-auto grid grid-cols-7 grid-rows-[auto_1fr] gap-6'
       )}
     >
-      {/* TOP-Left Section: Actions and Segment Selection */}
       <RFMActionsSegmentsSection />
-      {/* TOP-Right Section: KPI Overview */}
       <RFMKPISection
         segmentName={useFormatText({
           id: `${activeSegment}.text` as MessageId,
         })}
       />
-      {/* FULL-WIDTH BOTTOM Section: Opportunity Matrix */}
       <RFMOpportunityMatrixSection />
     </main>
   );
