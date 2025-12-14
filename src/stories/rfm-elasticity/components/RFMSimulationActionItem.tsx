@@ -10,11 +10,11 @@ import {
   ItemTitle,
 } from '@/common/ui/item';
 
-export function RFMSimulationActionItem() {
+export default function RFMSimulationActionItem() {
   return (
     <Item variant="muted" size="sm" className="w-fit gap-4">
       <ItemMedia variant="icon">
-        <Icon name="elasticity-segmentation" />
+        <Icon name="elasticity-segmentation" className="text-primary" />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>

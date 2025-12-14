@@ -1,8 +1,8 @@
 import { useRFMSegment } from '@/app/providers';
 import { Accordion } from '@/common/ui/accordion';
 import { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
-import RFMAccordionSection from './RFMAccordionSection';
-import { RFMSimulationActionItem } from './RFMSimulationActionItem';
+import { DashboardAccordionSection } from '../../dashboard/components';
+import RFMSimulationActionItem from './RFMSimulationActionItem';
 import SegmentToggleGroup from './SegmentToggleGroup';
 
 /**
@@ -17,14 +17,14 @@ export default function RFMActionsSegmentsSection() {
       className="md:col-span-3"
     >
       <div>
-        <RFMAccordionSection
+        <DashboardAccordionSection
           value="item-actions"
           titleId="rfm.accordion.action.title"
         >
           <RFMSimulationActionItem />
-        </RFMAccordionSection>
+        </DashboardAccordionSection>
 
-        <RFMAccordionSection
+        <DashboardAccordionSection
           value="item-segments"
           titleId="rfm.accordion.segments.title"
         >
@@ -35,7 +35,7 @@ export default function RFMActionsSegmentsSection() {
               setActiveSegment(val as RFMSegmentIds);
             }}
           />
-        </RFMAccordionSection>
+        </DashboardAccordionSection>
       </div>
     </Accordion>
   );

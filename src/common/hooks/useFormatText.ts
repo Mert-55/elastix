@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 
-import type { MessageId } from '@/app/i18n';
+import type { MessageId } from '@/common/i18n';
 
 interface UseFormatTextOptions {
   id: MessageId;

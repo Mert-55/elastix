@@ -18,7 +18,7 @@ export default function SegmentToggleGroupItem({
       <ToggleGroupItem
         value={segmentId}
         aria-label={`Toggle ${text}`}
-        className="min-w-[140px] justify-center whitespace-nowrap data-[state=on]:bg-transparent data-[state=on]:*:[svg]:fill-blue-500 data-[state=on]:*:[svg]:stroke-blue-500"
+        className="min-w-[140px] justify-center whitespace-nowrap data-[state=on]:[&_svg]:fill-primary-foreground data-[state=on]:[&_svg]:stroke-primary-foreground"
         asChild
         {...rest}
       >

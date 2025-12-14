@@ -1,7 +1,8 @@
+import { DashboardId } from '@/common/types/DashboardIds';
 import { type GroupItems } from '@/common/ui/SidebarGroupItems';
 import SidebarGroupCathegory from './SidebarGroupCathegory';
 
-export default function SidebarSegmentationGroup() {
+export default function SidebarRFMSegmentationGroup() {
   return (
     <SidebarGroupCathegory
       label={segmentationLabel}
@@ -14,11 +15,13 @@ const segmentationLabel = 'dashboard.sidebar.segmentation.label';
 
 const segmentationItems: GroupItems = [
   {
-    title: 'dashboard.segmentation.rfm.title',
+    id: DashboardId.RFMElasticity,
+    title: 'dashboard.segmentation.rfm-elasticity.title',
     icon: 'elasticity-segmentation',
   },
   {
-    title: 'dashboard.segmentation.customer.title',
+    id: DashboardId.RFMCustomer,
+    title: 'dashboard.segmentation.rfm-customer.title',
     icon: 'customer-segmentation',
   },
 ];

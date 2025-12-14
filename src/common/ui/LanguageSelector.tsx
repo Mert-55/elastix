@@ -1,3 +1,6 @@
+import { useLocale } from '@/app/providers';
+import { type Locale, supportedLocales } from '@/common/i18n';
+import { Icon } from '@/common/ui/icon';
 import {
   Select,
   SelectContent,
@@ -5,9 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/common/ui/select';
-import { Icon } from '@/common/ui/icon';
-import { type Locale, supportedLocales } from '@/app/i18n';
-import { useLocale } from '@/app/providers';
 
 const localeConfig: Record<
   Locale,

@@ -1,19 +1,14 @@
 import { useFormatText } from '@/common/hooks/useFormatText';
-import { DashboardIds } from '@/common/types/DashboardIds';
 import { SidebarTrigger } from '@/common/ui/sidebar';
 
 import tokens from '@/app/config/tokens';
+import { useActiveDashboard } from '@/app/providers';
 import { cn } from '@/common/lib/utils';
 import { LanguageSelector } from '@/common/ui/LanguageSelector';
 import { ThemeToggle } from '@/common/ui/ThemeToggle';
 
-interface BaseDashboardHeaderProps {
-  activeDashboard: DashboardIds;
-}
-
-export default function BaseDashboardHeader({
-  activeDashboard,
-}: BaseDashboardHeaderProps) {
+export default function BaseDashboardHeader() {
+  const { activeDashboard } = useActiveDashboard();
   const dashboardTitle = useFormatText({
     id: `dashboard.sidebar.segmentation.${activeDashboard}.title` as any,
   });

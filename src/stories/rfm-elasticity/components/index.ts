@@ -1,11 +1,7 @@
+export { default as RFMAccordionSection } from '../../dashboard/components/DashboardAccordionSection';
 export { default as KPIRadialGauge } from './KPIRadialGauge';
 export { default as OpportunityMatrix } from './OpportunityMatrix';
-export { default as RFMAccordionSection } from './RFMAccordionSection';
-export { default as RFMActionsSegmentsSection } from './RFMActionsSegmentsSection';
-export { default as RFMDashboard } from './RFMDashboard';
-export { default as RFMKPISection } from './RFMKPISection';
-export { default as RFMOpportunityMatrixSection } from './RFMOpportunityMatrixSection';
-export { default as RFMSimulationActionItem } from './RFMSimulationActionItem';
+export { default as RFMElasticityDashboard } from './RFMElasticityDashboard';
 export { default as SegmentKPIOverview } from './SegmentKPIOverview';
 export { default as SegmentToggleGroup } from './SegmentToggleGroup';
 export { default as SegmentToggleGroupItem } from './SegmentToggleGroupItem';

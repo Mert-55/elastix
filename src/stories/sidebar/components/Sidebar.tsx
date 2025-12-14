@@ -1,6 +1,6 @@
 import { Sidebar as Base, SidebarContent } from '@/common/ui/sidebar';
 import SidebarDataGroup from './SidebarDataGroup';
-import SidebarSegmentationGroup from './SidebarSegmentationGroup';
+import SidebarRFMSegmentationGroup from './SidebarRFMSegmentationGroup';
 import SidebarSimulationGroup from './SidebarSimulationGroup';
 
 export default function Sidebar() {
@@ -8,7 +8,7 @@ export default function Sidebar() {
     <Base>
       <SidebarContent>
         <SidebarSimulationGroup />
-        <SidebarSegmentationGroup />
+        <SidebarRFMSegmentationGroup />
         <SidebarDataGroup />
       </SidebarContent>
     </Base>

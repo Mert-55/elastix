@@ -104,12 +104,12 @@ export default function SegmentKPIOverview({
 
   return (
     <ScrollArea
-      className="w-full rounded-md border whitespace-nowrap"
+      className="w-full rounded-xl border whitespace-nowrap font-mono"
       type="always"
     >
       <div
         className={cn(
-          'flex flex-nowrap items-center justify-center gap-8 p-7 bg-card/10 rounded-md',
+          'flex flex-nowrap items-center justify-center gap-8 p-7 bg-card/10 rounded-xl',
           className
         )}
       >
