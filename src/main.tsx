@@ -4,9 +4,14 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import App from '@/app/App.tsx';
-import { I18nProvider, ThemeProvider } from '@/app/providers';
+import {
+  ActiveDashboardProvider,
+  I18nProvider,
+  ThemeProvider,
+} from '@/app/providers';
+import { SidebarProvider } from '@/common/ui/sidebar';
 import { TooltipProvider } from '@/common/ui/tooltip.tsx';
-import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -15,7 +20,11 @@ createRoot(document.getElementById('root')!).render(
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <I18nProvider>
         <TooltipProvider>
-          <App />
+          <ActiveDashboardProvider>
+            <SidebarProvider>
+              <App />
+            </SidebarProvider>
+          </ActiveDashboardProvider>
         </TooltipProvider>
       </I18nProvider>
     </ThemeProvider>

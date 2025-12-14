@@ -1,14 +1,14 @@
 import tokens from '@/app/config/tokens';
-import type { MessageId } from '@/app/i18n';
 import { useRFMSegment } from '@/app/providers';
 import { useFormatText } from '@/common/hooks/useFormatText';
+import type { MessageId } from '@/common/i18n';
 import { cn } from '@/common/lib/utils';
 
 import RFMActionsSegmentsSection from './RFMActionsSegmentsSection';
 import RFMKPISection from './RFMKPISection';
 import RFMOpportunityMatrixSection from './RFMOpportunityMatrixSection';
 
-export default function RFMDashboard() {
+export default function RFMElasticityDashboard() {
   const { activeSegment } = useRFMSegment();
   return (
     <main

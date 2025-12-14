@@ -1,7 +1,7 @@
-import { Accordion } from '@/common/ui/accordion';
-import RFMAccordionSection from './RFMAccordionSection';
-import SegmentKPIOverview from './SegmentKPIOverview';
 import { useRFMSegment } from '@/app/providers';
+import { Accordion } from '@/common/ui/accordion';
+import { DashboardAccordionSection } from '../../dashboard/components';
+import SegmentKPIOverview from './SegmentKPIOverview';
 
 export interface RFMKPISectionProps {
   segmentName: string | null;
@@ -18,13 +18,13 @@ export default function RFMKPISection({ segmentName }: RFMKPISectionProps) {
       className="md:col-span-4 min-h-0"
       defaultValue={['item-kpi']}
     >
-      <RFMAccordionSection
+      <DashboardAccordionSection
         value="item-kpi"
         titleId="rfm.accordion.kpi.title"
         titleValues={{ segment: segmentName ?? '' }}
       >
         <SegmentKPIOverview activeSegmentId={activeSegment} />
-      </RFMAccordionSection>
+      </DashboardAccordionSection>
     </Accordion>
   );
 }

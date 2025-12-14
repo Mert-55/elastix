@@ -1,6 +1,8 @@
 import { useFormatText } from '@/common/hooks/useFormatText';
-import type { MessageId } from '@/app/i18n';
+import type { MessageId } from '@/common/i18n';
 
+import { useActiveDashboard } from '@/app/providers';
+import type { DashboardId } from '@/common/types/DashboardIds';
 import { Icon, type IconName } from './icon';
 import {
   SidebarGroupContent,
@@ -10,25 +12,39 @@ import {
 } from './sidebar';
 
 export function SidebarGroupItems({ items }: { items: GroupItems }) {
+  const { activeDashboard, setActiveDashboard } = useActiveDashboard();
+
   return (
     <SidebarGroupContent>
       <SidebarMenu>
-        {items.map(({ title, url, icon }) => (
-          <SidebarMenuItem key={title}>
-            <SidebarMenuButton asChild>
-              <a href={url}>
-                <Icon name={icon} />
+        {items.map(({ id, title, icon }) => {
+          const isActive = id ? activeDashboard === id : false;
+          const hasAction = !!id;
+
+          return (
+            <SidebarMenuItem key={id || title}>
+              <SidebarMenuButton
+                isActive={isActive}
+                onClick={hasAction ? () => setActiveDashboard(id) : undefined}
+                disabled={!hasAction}
+              >
+                <Icon
+                  name={icon}
+                  className="transition-all data-[active=true]:fill-primary data-[active=true]:stroke-primary"
+                  data-active={isActive}
+                />
                 <span>{useFormatText({ id: title })}</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        ))}
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          );
+        })}
       </SidebarMenu>
     </SidebarGroupContent>
   );
 }
 
 export type GroupItems = {
+  id?: DashboardId;
   title: MessageId;
   icon: IconName;
   url?: string;

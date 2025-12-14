@@ -1,8 +1,8 @@
-import { AgGridReact } from 'ag-grid-react';
-import type { AgGridReactProps } from 'ag-grid-react';
-import { themeQuartz } from 'ag-grid-community';
-import { useMemo } from 'react';
 import { cn } from '@/common/lib/utils';
+import { themeQuartz } from 'ag-grid-community';
+import type { AgGridReactProps } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
+import { useMemo } from 'react';
 
 export interface DataGridProps<TData> extends Omit<
   AgGridReactProps<TData>,
@@ -33,8 +33,10 @@ export default function DataGrid<TData>({
     foregroundColor: 'var(--foreground)',
     headerFontSize: 14,
     headerBackgroundColor: 'var(--muted-item)',
+    headerFontFamily: 'var(--font-mono)',
+    headerFontWeight: 'var(--font-weight-semibold)',
     borderColor: 'transparent',
-    wrapperBorderRadius: 'var(--radius-md)',
+    wrapperBorderRadius: 'var(--radius-xl)',
   });
 
   const mergedDefaultColDef = useMemo(
@@ -48,7 +50,7 @@ export default function DataGrid<TData>({
   );
 
   return (
-    <div className={cn('w-full min-h-0 max-h-full h-[400px]', className)}>
+    <div className={cn('w-full min-h-0 max-h-full h-[600px]', className)}>
       <AgGridReact<TData>
         theme={theme}
         rowData={rowData}

@@ -1,15 +1,15 @@
-import type { ReactNode } from 'react';
-import {
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from '@/common/ui/accordion';
 import { useFormatText } from '@/common/hooks/useFormatText';
 import type { MessageId } from '@/common/i18n';
-import type { AccordionItemProps } from '@radix-ui/react-accordion';
 import { cn } from '@/common/lib/utils';
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/common/ui/accordion';
+import type { AccordionItemProps } from '@radix-ui/react-accordion';
+import type { ReactNode } from 'react';
 
-export interface RFMAccordionSectionProps extends Omit<
+export interface DashboardAccordionSectionProps extends Omit<
   AccordionItemProps,
   'value'
 > {
@@ -27,14 +27,14 @@ export interface RFMAccordionSectionProps extends Omit<
  * Generische Accordion Section für das RFM Dashboard
  * Reduziert Wiederholungen bei den verschiedenen AccordionItems
  */
-export default function RFMAccordionSection({
+export default function DashboardAccordionSection({
   value,
   titleId,
   titleValues,
   children,
   className,
   ...props
-}: RFMAccordionSectionProps) {
+}: DashboardAccordionSectionProps) {
   const title = useFormatText({ id: titleId, values: titleValues });
 
   return (

@@ -1,7 +1,7 @@
 import { createContext, type ReactNode, useContext, useState } from 'react';
 import { IntlProvider } from 'react-intl';
 
-import { defaultLocale, type Locale, messages } from '../i18n';
+import { defaultLocale, type Locale, messages } from '../../common/i18n';
 
 interface LocaleContextValue {
   locale: Locale;

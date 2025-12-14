@@ -8,7 +8,7 @@ export default function SegmentToggleGroup({
   ...base
 }: Omit<ToggleGroupSingleProps, 'type'>) {
   return (
-    <ScrollArea className="w-full rounded-md whitespace-nowrap" type="always">
+    <ScrollArea className="w-full rounded-xl whitespace-nowrap" type="always">
       <ToggleGroup
         type="single"
         orientation="horizontal"

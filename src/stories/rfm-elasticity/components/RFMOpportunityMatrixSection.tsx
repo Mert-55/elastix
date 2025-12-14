@@ -1,7 +1,7 @@
-import { Accordion } from '@/common/ui/accordion';
-import RFMAccordionSection from './RFMAccordionSection';
-import OpportunityMatrix from './OpportunityMatrix';
 import { useRFMSegment } from '@/app/providers';
+import { Accordion } from '@/common/ui/accordion';
+import { DashboardAccordionSection } from '../../dashboard/components';
+import OpportunityMatrix from './OpportunityMatrix';
 
 /**
  * Volle Breite: Opportunity Matrix Tabelle für das aktive Segment
@@ -14,13 +14,13 @@ export default function RFMOpportunityMatrixSection() {
       value="item-opportunity"
       className="md:col-span-7 md:row-span-2 flex min-h-0 flex-col"
     >
-      <RFMAccordionSection
+      <DashboardAccordionSection
         value="item-opportunity"
         titleId="rfm.accordion.opportunity.title"
         className="flex-1 min-h-full"
       >
         <OpportunityMatrix activeSegmentId={activeSegment} />
-      </RFMAccordionSection>
+      </DashboardAccordionSection>
     </Accordion>
   );
 }
