@@ -102,6 +102,18 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip;
 
+function ChartProvider({
+  config,
+  children,
+}: {
+  config: ChartConfig;
+  children: React.ReactNode;
+}) {
+  return (
+    <ChartContext.Provider value={{ config }}>{children}</ChartContext.Provider>
+  );
+}
+
 function ChartTooltipContent({
   active,
   payload,
@@ -349,6 +361,7 @@ export {
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
+  ChartProvider,
   ChartStyle,
   ChartTooltip,
   ChartTooltipContent,

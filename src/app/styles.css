@@ -14,8 +14,17 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--sidebar);
 }
 
 #root {
   min-height: 100vh;
+}
+
+mark {
+  background-color: transparent;
+  background-image:
+    linear-gradient(to bottom right, transparent 50%, var(--primary) 50% 100%),
+    linear-gradient(to right, var(--primary), var(--primary)),
+    linear-gradient(to top left, transparent 50%, var(--primary) 50%);
 }
