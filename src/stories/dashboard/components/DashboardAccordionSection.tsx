@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/common/ui/accordion';
+import { Icon, type IconName } from '@/common/ui/icon';
 import type { AccordionItemProps } from '@radix-ui/react-accordion';
 import type { ReactNode } from 'react';
 
@@ -19,6 +20,8 @@ export interface DashboardAccordionSectionProps extends Omit<
   titleId: MessageId;
   /** Optionale Werte für die Übersetzung (z.B. {segment: 'Champions'}) */
   titleValues?: Record<string, string | number>;
+  /** Optionales Icon für den Titel */
+  icon?: IconName;
   /** Inhalt des Accordion Panels */
   children: ReactNode;
 }
@@ -33,6 +36,7 @@ export default function DashboardAccordionSection({
   titleValues,
   children,
   className,
+  icon,
   ...props
 }: DashboardAccordionSectionProps) {
   const title = useFormatText({ id: titleId, values: titleValues });
@@ -44,7 +48,10 @@ export default function DashboardAccordionSection({
       {...props}
     >
       <AccordionTrigger className="text-base font-semibold tracking-tight">
-        {title}
+        <span className="inline-flex items-center gap-2">
+          {icon && <Icon name={icon} size={18} />}
+          {title}
+        </span>
       </AccordionTrigger>
       <AccordionContent className={'overflow-hidden'}>
         {children}
