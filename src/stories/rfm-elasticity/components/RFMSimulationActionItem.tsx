@@ -12,9 +12,16 @@ import {
 
 export default function RFMSimulationActionItem() {
   return (
-    <Item variant="muted" size="sm" className="w-fit gap-4">
-      <ItemMedia variant="icon">
-        <Icon name="elasticity-segmentation" className="text-primary" />
+    <Item
+      variant="outline"
+      size="sm"
+      className="w-fit gap-4 bg-linear-to-r from-primary/16 to-accent/32 ease-in hover:from-primary/24 hover:to-accent/12 hover:border-ring"
+    >
+      <ItemMedia variant="icon" className="bg-secondary border-ring rounded-xl">
+        <Icon
+          name="elasticity-segmentation"
+          className="text-secondary-foreground"
+        />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>
