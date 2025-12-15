@@ -9,7 +9,7 @@ import { useTheme } from '@/app/providers';
 import { useFormatText } from '@/common/hooks/useFormatText';
 import type { MessageId } from '@/common/i18n';
 import { cn } from '@/common/lib/utils';
-import { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
+import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 
 import {
   chartConfig,

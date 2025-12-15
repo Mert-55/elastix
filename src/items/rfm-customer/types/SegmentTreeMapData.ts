@@ -20,7 +20,7 @@
  * }
  */
 
-import type { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
+import type { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 
 /**
  * Single customer segment data for treemap visualization
@@ -87,26 +87,41 @@ export function transformToTreeMapData(segments: SegmentData[]): TreeMapNode {
 export function getSegmentColor(score: number): string {
   const rounded = Math.max(0, Math.min(5, Math.round(score)));
 
-  // Critical state: Lost segment
-  if (rounded === 0) return 'var(--destructive)';
-
-  // Champions..Potential (3-5): primary tones.
-  // Mix with muted (not background) so the result stays usable in both light & dark.
-  if (rounded >= 3) {
-    const intensityByScore: Record<number, number> = {
-      3: 76,
-      4: 84,
-      5: 92,
-    };
-    const intensity = intensityByScore[rounded] ?? 84;
-    return `color-mix(in oklab, var(--primary) ${intensity}%, var(--muted) ${100 - intensity}%)`;
+  // 🔴 0: Lost (Kritisch)
+  // Grau/Muted, sehr transparent, um nicht zu sehr abzulenken, aber sichtbar "inaktiv".
+  if (rounded === 0) {
+    return 'var(--muted)';
   }
 
-  // At Risk..Hibernating (1-2): secondary tones.
-  const intensityByScore: Record<number, number> = {
-    1: 66,
-    2: 78,
-  };
-  const intensity = intensityByScore[rounded] ?? 72;
-  return `color-mix(in oklab, var(--secondary) ${intensity}%, var(--muted) ${100 - intensity}%)`;
+  // 🟢 5: Champions (Der Anker)
+  // Volle Kraft Primary. Keine Transparenz. Das stärkste Element im Chart.
+  if (rounded === 5) {
+    return 'var(--primary)';
+  }
+
+  // 🟢 4: Potential / Loyal
+  // Wir mischen 20% Accent hinzu. Das unterscheidet es von Score 5,
+  // bleibt aber "voll" und deckend.
+  if (rounded === 4) {
+    return 'color-mix(in srgb, var(--chart-4), var(--accent) 20%)';
+  }
+
+  // 🟡 3: Promising
+  // Hier startet der "Fade". Wir mischen 40% Transparenz hinzu.
+  // Die Farbe ist noch deutlich erkennbar, aber "leichter".
+  if (rounded === 3) {
+    return 'color-mix(in srgb, var(--chart-3), transparent 40%)';
+  }
+
+  // 🟠 2: At Risk
+  // Deutlich transparenter (60% transparent).
+  // Das signalisiert visuell: "Diese Gruppe verblasst".
+  if (rounded === 2) {
+    return 'color-mix(in srgb, var(--destructive), transparent 70%)';
+  }
+
+  // 🟠 1: Hibernating
+  // Ghost-Mode. 85% transparent. Man sieht nur einen Hauch von Farbe.
+  // Wirkt modern und drängt sich nicht auf.
+  return 'color-mix(in srgb, var(--chart-2), transparent 85%)';
 }

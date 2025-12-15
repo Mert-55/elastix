@@ -1,6 +1,6 @@
 import tokens from '@/app/config/tokens';
 import { cn } from '@/common/lib/utils';
-import RFMCustomerTreeMapAccordionItem from '@/stories/rfm-customer/components/RFMCustomerTreeMapAccordionItem';
+import RFMCustomerTreeMapAccordionItem from '@/items/rfm-customer/components/RFMCustomerTreeMapAccordionItem';
 import { Accordion } from '@radix-ui/react-accordion';
 
 export default function RFMCustomerDashboard() {

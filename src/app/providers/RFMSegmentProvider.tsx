@@ -1,4 +1,4 @@
-import { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
+import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import { createContext, useContext, useState } from 'react';
 
 type RFMSegmentContextValue = {

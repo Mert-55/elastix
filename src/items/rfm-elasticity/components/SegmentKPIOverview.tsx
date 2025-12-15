@@ -1,12 +1,12 @@
 import { useFormatText } from '@/common/hooks/useFormatText';
 import { cn } from '@/common/lib/utils';
 import { ScrollArea, ScrollBar } from '@/common/ui/scroll-area';
-import { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
+import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import type {
   ChurnRiskLevel,
   PriceSensitivityLevel,
   RFMSegmentKPIData,
-} from '@/stories/rfm-elasticity/types/RFMSegmentKPIData';
+} from '@/items/rfm-elasticity/types/RFMSegmentKPIData';
 import KPIRadialGauge from './KPIRadialGauge';
 
 /**
