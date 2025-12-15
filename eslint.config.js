@@ -55,9 +55,9 @@ export default defineConfig([
                 'Use @/common/* alias instead of relative imports for common layer.',
             },
             {
-              group: ['../**/stories/*', '../**/stories/*'],
+              group: ['../**/items/*', '../**/items/*'],
               message:
-                'Use @/stories/* alias instead of relative imports for stories layer.',
+                'Use @/items/* alias instead of relative imports for items layer.',
             },
             {
               group: ['../**/pages/*', '../**/pages/*'],

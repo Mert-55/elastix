@@ -1,6 +1,6 @@
 import type { ChartConfig } from '@/common/ui/chart';
 import type { IconName } from '@/common/ui/icon';
-import { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
+import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 
 /**
  * ChartConfig for TreeMap segments

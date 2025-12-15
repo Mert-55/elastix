@@ -2,7 +2,7 @@ import { useFormatText } from '@/common/hooks/useFormatText';
 import { Icon, type IconName } from '@/common/ui/icon';
 import { OptionalTooltip } from '@/common/ui/OptionalTooltip';
 import { ToggleGroupItem } from '@/common/ui/toggle-group';
-import type { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
+import type { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import type { ToggleGroupItemProps } from '@radix-ui/react-toggle-group';
 
 export default function SegmentToggleGroupItem({

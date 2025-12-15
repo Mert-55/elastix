@@ -1,6 +1,6 @@
 import { ScrollArea, ScrollBar } from '@/common/ui/scroll-area';
 import { ToggleGroup } from '@/common/ui/toggle-group';
-import { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
+import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import type { ToggleGroupSingleProps } from '@radix-ui/react-toggle-group';
 import SegmentToggleGroupItem from './SegmentToggleGroupItem';
 

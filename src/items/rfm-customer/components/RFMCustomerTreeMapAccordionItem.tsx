@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/common/ui/card';
-import { DashboardAccordionSection } from '@/stories/dashboard/components';
+import { DashboardAccordionSection } from '@/items/dashboard/components';
 import { mockSegmentData } from '../model/mockSegmentData';
 import SegmentTreeMap from './SegmentTreeMap';
 

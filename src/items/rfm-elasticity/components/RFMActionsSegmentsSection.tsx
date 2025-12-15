@@ -1,6 +1,6 @@
 import { useRFMSegment } from '@/app/providers';
 import { Accordion } from '@/common/ui/accordion';
-import { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
+import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import { DashboardAccordionSection } from '../../dashboard/components';
 import RFMSimulationActionItem from './RFMSimulationActionItem';
 import SegmentToggleGroup from './SegmentToggleGroup';

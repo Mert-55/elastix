@@ -5,8 +5,8 @@ import type {
   ElasticityType,
   OpportunityMatrixItem,
   PriceRecommendation,
-} from '@/stories/rfm-elasticity/types/OpportunityMatrixItem';
-import { RFMSegmentIds } from '@/stories/rfm-elasticity/types/RFMSegmentId';
+} from '@/items/rfm-elasticity/types/OpportunityMatrixItem';
+import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import type { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { useMemo } from 'react';
 

@@ -1,5 +1,5 @@
-import { BaseDashboard } from '@/stories/dashboard/components';
-import { Sidebar } from '@/stories/sidebar/components';
+import { BaseDashboard } from '@/items/dashboard/components';
+import { Sidebar } from '@/items/sidebar/components';
 
 export default function DashboardPage() {
   return (

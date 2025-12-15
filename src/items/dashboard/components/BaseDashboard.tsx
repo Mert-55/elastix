@@ -4,8 +4,8 @@ import {
   useActiveDashboard,
 } from '@/app/providers';
 import { DashboardId } from '@/common/types/DashboardIds';
-import { RFMCustomerDashboard } from '@/stories/rfm-customer/components';
-import { RFMElasticityDashboard } from '@/stories/rfm-elasticity/components';
+import { RFMCustomerDashboard } from '@/items/rfm-customer/components';
+import { RFMElasticityDashboard } from '@/items/rfm-elasticity/components';
 import { Activity } from 'react';
 import BaseDashboardHeader from './BaseDashboardHeader';
 
