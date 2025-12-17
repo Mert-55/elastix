@@ -59,7 +59,7 @@ export default function SegmentTreeMap({
 
   const intl = useIntl();
 
-  const ariaLabel = useFormatText({ id: 'rfm.customer.treemap.ariaLabel' });
+  const ariaLabel = useFormatText({ id: 'rfm.customer.tree-map.ariaLabel' });
 
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 

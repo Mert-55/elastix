@@ -44,7 +44,7 @@ export default function DashboardAccordionSection({
   return (
     <AccordionItem
       value={value}
-      className={cn('flex h-full flex-col', className)}
+      className={cn('flex h-auto flex-col', className)}
       {...props}
     >
       <AccordionTrigger className="text-base font-semibold tracking-tight">
