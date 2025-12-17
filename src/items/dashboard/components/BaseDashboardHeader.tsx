@@ -3,6 +3,7 @@ import { SidebarTrigger } from '@/common/ui/sidebar';
 
 import tokens from '@/app/config/tokens';
 import { useActiveDashboard } from '@/app/providers';
+import type { MessageId } from '@/common/i18n';
 import { cn } from '@/common/lib/utils';
 import { LanguageSelector } from '@/common/ui/LanguageSelector';
 import { ThemeToggle } from '@/common/ui/ThemeToggle';
@@ -10,7 +11,7 @@ import { ThemeToggle } from '@/common/ui/ThemeToggle';
 export default function BaseDashboardHeader() {
   const { activeDashboard } = useActiveDashboard();
   const dashboardTitle = useFormatText({
-    id: `dashboard.sidebar.segmentation.${activeDashboard}.title` as any,
+    id: `dashboard.sidebar.segmentation.${activeDashboard}.title` as MessageId,
   });
 
   const SidebarControllMenu = () => (

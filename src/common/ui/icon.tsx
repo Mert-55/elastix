@@ -1,5 +1,6 @@
 import {
   AlertCircle,
+  AudioWaveform,
   BadgeDollarSign,
   BarChart3,
   Bell,
@@ -55,6 +56,7 @@ export const iconMap = {
   'transaction-data': BadgeDollarSign,
   'stock-data': Warehouse,
   'customer-segmentation': UserStar,
+  'revenue-segmentation': AudioWaveform,
   'elasticity-segmentation': ChartNetwork,
   dark: Moon,
   light: Sun,
