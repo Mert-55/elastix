@@ -1,7 +1,5 @@
-export {
-  ActiveDashboardProvider,
-  useActiveDashboard,
-} from './AcitveDashboardProvider';
-export { I18nProvider, useLocale } from './I18nProvider';
+export { useActiveDashboard } from './ActiveDashboardProvider';
+export { default as AppProvider } from './AppProvider';
+export { useLocale } from './I18nProvider';
 export { RFMSegmentProvider, useRFMSegment } from './RFMSegmentProvider';
-export { ThemeProvider, useTheme } from './ThemeProvider';
+export { useTheme } from './ThemeProvider';

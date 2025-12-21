@@ -21,8 +21,13 @@ export function SidebarGroupItems({ items }: { items: GroupItems }) {
           const isActive = id ? activeDashboard === id : false;
           const hasAction = !!id;
 
+          const [titleKey, titleValues] =
+            typeof title === 'string'
+              ? [title, undefined]
+              : [title.id, title.values];
+
           return (
-            <SidebarMenuItem key={id || title}>
+            <SidebarMenuItem key={id || titleKey}>
               <SidebarMenuButton
                 isActive={isActive}
                 onClick={hasAction ? () => setActiveDashboard(id) : undefined}
@@ -33,7 +38,9 @@ export function SidebarGroupItems({ items }: { items: GroupItems }) {
                   className="transition-all data-[active=true]:fill-primary data-[active=true]:stroke-primary"
                   data-active={isActive}
                 />
-                <span>{useFormatText({ id: title })}</span>
+                <span>
+                  {useFormatText({ id: titleKey, values: titleValues })}
+                </span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           );
@@ -45,7 +52,9 @@ export function SidebarGroupItems({ items }: { items: GroupItems }) {
 
 export type GroupItems = {
   id?: DashboardId;
-  title: MessageId;
+  title:
+    | MessageId
+    | { id: MessageId; values?: Record<string, string | number> };
   icon: IconName;
   url?: string;
 }[];
