@@ -9,6 +9,7 @@
   "common.save": "Speichern",
   "common.start": "Starten",
   "common.success": "Erfolg",
+  "validation.minLength": "Mindestens {limit} Zeichen erforderlich",
   "dashboard.segmentation.rfm-customer.title": "Kunden Segmentierung",
   "dashboard.segmentation.rfm-elasticity.title": "Elastizität Segmentierung",
   "dashboard.sidebar.data.customer.title": "Kunden",

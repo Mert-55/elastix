@@ -1,5 +1,7 @@
+import { useFormatText } from '@/common/hooks/useFormatText';
+import type { MessageId } from '@/common/i18n';
 import type { TooltipProps } from '@radix-ui/react-tooltip';
-import { Tooltip, TooltipTrigger, TooltipContent } from './tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
 
 export function OptionalTooltip({
   children,
@@ -7,13 +9,21 @@ export function OptionalTooltip({
   suppressAsChild = false,
   ...rest
 }: OptionalTooltip) {
-  if (!tooltip) {
+  const tooltipText =
+    typeof tooltip === 'string'
+      ? tooltip
+      : tooltip
+        ? useFormatText(tooltip)
+        : undefined;
+
+  if (!tooltipText) {
     return <>{children}</>;
   }
+
   return (
     <Tooltip {...rest}>
       <TooltipTrigger asChild={!suppressAsChild}>{children}</TooltipTrigger>
-      {tooltip && <TooltipContent>{tooltip}</TooltipContent>}
+      <TooltipContent>{tooltipText}</TooltipContent>
     </Tooltip>
   );
 }
@@ -21,5 +31,7 @@ export function OptionalTooltip({
 export type OptionalTooltip = {
   children: React.ReactNode;
   suppressAsChild?: boolean;
-  tooltip?: string;
+  tooltip?:
+    | string
+    | { id: MessageId; values?: Record<string, string | number> };
 } & TooltipProps;
