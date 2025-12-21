@@ -1,0 +1,19 @@
+import { ActiveDashboardProvider } from '@/app/providers/ActiveDashboardProvider';
+import { I18nProvider } from '@/app/providers/I18nProvider';
+import { ThemeProvider } from '@/app/providers/ThemeProvider';
+import { SidebarProvider } from '@/common/ui/sidebar';
+import { TooltipProvider } from '@/common/ui/tooltip';
+
+const AppProvider = ({ children }: { children: React.ReactNode }) => (
+  <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <I18nProvider>
+      <TooltipProvider>
+        <ActiveDashboardProvider>
+          <SidebarProvider>{children}</SidebarProvider>
+        </ActiveDashboardProvider>
+      </TooltipProvider>
+    </I18nProvider>
+  </ThemeProvider>
+);
+
+export default AppProvider;

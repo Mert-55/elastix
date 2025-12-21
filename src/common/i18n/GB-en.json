@@ -16,6 +16,7 @@
   "dashboard.sidebar.data.stock.title": "Stock",
   "dashboard.sidebar.data.transaction.title": "Transactions",
   "dashboard.sidebar.segmentation.label": "RFM Analytics",
+  "dashboard.sidebar.actions.label": "Actions",
   "dashboard.sidebar.segmentation.rfm-elasticity.description": "Manage Elasticity Segmentation",
   "dashboard.sidebar.segmentation.rfm-elasticity.title": "Elasticity Segmentation",
   "dashboard.sidebar.segmentation.rfm-customer.title": "Customer Segmentation",

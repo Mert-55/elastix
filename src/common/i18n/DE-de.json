@@ -19,6 +19,7 @@
   "dashboard.sidebar.segmentation.rfm-elasticity.description": "Elastizität Segmentation verwalten",
   "dashboard.sidebar.segmentation.rfm-elasticity.title": "Elastizität Segmentierung",
   "dashboard.sidebar.segmentation.rfm-customer.title": "Kunden Segmentierung",
+  "dashboard.sidebar.actions.label": "Aktionen",
   "rfm.accordion.action.simulation.description": "Was wäre, wenn? Wie reagieren meine Segmente auf Preisaktionen?",
   "rfm.accordion.action.simulation.title": "RFM-Simulation starten",
   "rfm.accordion.action.title": "Aktionen",

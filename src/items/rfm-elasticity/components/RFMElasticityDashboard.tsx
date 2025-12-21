@@ -1,5 +1,5 @@
 import tokens from '@/app/config/tokens';
-import { useRFMSegment } from '@/app/providers';
+import { RFMSegmentProvider, useRFMSegment } from '@/app/providers';
 import { useFormatText } from '@/common/hooks/useFormatText';
 import type { MessageId } from '@/common/i18n';
 import { cn } from '@/common/lib/utils';
@@ -8,7 +8,7 @@ import RFMActionsSegmentsSection from './RFMActionsSegmentsSection';
 import RFMKPISection from './RFMKPISection';
 import RFMOpportunityMatrixSection from './RFMOpportunityMatrixSection';
 
-export default function RFMElasticityDashboard() {
+function RFMElasticityDashboardContent() {
   const { activeSegment } = useRFMSegment();
   return (
     <main
@@ -25,5 +25,13 @@ export default function RFMElasticityDashboard() {
       />
       <RFMOpportunityMatrixSection />
     </main>
+  );
+}
+
+export default function RFMElasticityDashboard() {
+  return (
+    <RFMSegmentProvider>
+      <RFMElasticityDashboardContent />
+    </RFMSegmentProvider>
   );
 }

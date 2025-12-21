@@ -14,15 +14,14 @@ export default function SidebarGroupCathegory({
   return (
     <Base>
       {label && (
-        <SidebarGroupLabel>
-          {useFormatText({
-            id: label,
-          })}
-        </SidebarGroupLabel>
+        <SidebarGroupLabel>{useFormatText({ id: label })}</SidebarGroupLabel>
       )}
       <SidebarGroupItems items={items} />
     </Base>
   );
 }
 
-export type SidebarGroupCathegory = { label?: MessageId; items: GroupItems };
+export type SidebarGroupCathegory = {
+  label?: MessageId;
+  items: GroupItems;
+};

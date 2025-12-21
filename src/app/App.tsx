@@ -1,9 +1,16 @@
+import { AppProvider } from '@/app/providers';
 import './styles.css';
 
-import DashboardPage from '../pages/DasboardPage';
+import Dashboard from '@/items/dashboard/components/Dashboard';
+import Sidebar from '@/items/sidebar/components/Sidebar';
 
 function App() {
-  return <DashboardPage />;
+  return (
+    <AppProvider>
+      <Sidebar />
+      <Dashboard />
+    </AppProvider>
+  );
 }
 
 export default App;
