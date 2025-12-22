@@ -1,4 +1,4 @@
-import type { MessageId } from '@/common/i18n';
+import type { TranslatableText } from '@/common/types/TranslatableText';
 import type { TooltipProps } from '@radix-ui/react-tooltip';
 import { useMemo } from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
@@ -33,8 +33,6 @@ export function OptionalTooltip({
 export type OptionalTooltip = {
   children: React.ReactNode;
   suppressAsChild?: boolean;
-  tooltip?:
-    | string
-    | { id: MessageId; values?: Record<string, string | number> };
+  tooltip?: string | TranslatableText;
   destructive?: boolean;
 } & TooltipProps;
