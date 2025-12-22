@@ -8,47 +8,29 @@ import {
   InputGroupInput,
 } from '@/common/ui/input-group';
 import { OptionalTooltip } from '@/common/ui/OptionalTooltip';
-import { useDashboardNameValidation } from '@/items/dashboard/hooks/useDashboardNameValidation';
-import { useState } from 'react';
 
-export default function EditableDashboardMenuPanel({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [value, setValue] = useState('');
-  const { isValid, message } = useDashboardNameValidation(value);
-
-  if (!isEditing) {
-    return (
-      <>
-        {children}
-        <Button
-          variant="ghost"
-          className="rounded-xl"
-          size="icon"
-          onClick={() => setIsEditing(true)}
-        >
-          <Icon name="edit" />
-        </Button>
-      </>
-    );
-  }
+export default function DashboardMenuEditMode({
+  value,
+  onChange,
+  isValid,
+  validationMessage,
+  onSave,
+}: DashboardMenuEditModeProps) {
+  const saveText = useFormatText({ id: 'common.save' });
 
   return (
     <>
       <InputGroup
         className={cn(
           'rounded-xl',
-          !isValid && 'bg-accent/10 border-destructive/30'
+          !isValid && 'bg-accent/10 border-accent-foreground'
         )}
       >
         <InputGroupInput
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => onChange(e.target.value)}
         />
-        <OptionalTooltip open tooltip={message}>
+        <OptionalTooltip open tooltip={validationMessage} destructive>
           <InputGroupAddon align="inline-end">
             <div
               className={cn(
@@ -64,12 +46,20 @@ export default function EditableDashboardMenuPanel({
         </OptionalTooltip>
       </InputGroup>
       <Button
-        onClick={() => setIsEditing(false)}
+        onClick={onSave}
         className="rounded-xl bg-primary/40 text-accent-foreground"
         disabled={!isValid}
       >
-        {useFormatText({ id: 'common.save' })}
+        {saveText}
       </Button>
     </>
   );
+}
+
+interface DashboardMenuEditModeProps {
+  value: string;
+  onChange: (value: string) => void;
+  isValid: boolean;
+  validationMessage: string | undefined;
+  onSave: () => void;
 }

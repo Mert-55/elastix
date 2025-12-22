@@ -10,6 +10,8 @@
   "common.start": "Starten",
   "common.success": "Erfolg",
   "validation.minLength": "Mindestens {limit} Zeichen erforderlich",
+  "dashboard.editable.description.placeholder": "Beschreibung hinzufügen...",
+  "dashboard.editable.description.accordion.title": "Beschreibung",
   "dashboard.segmentation.rfm-customer.title": "Kunden Segmentierung",
   "dashboard.segmentation.rfm-elasticity.title": "Elastizität Segmentierung",
   "dashboard.sidebar.data.customer.title": "Kunden",
