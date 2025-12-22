@@ -70,17 +70,7 @@ export function MarkdownPreviewCard({
             ),
 
             // Code
-            code: ({ node, inline, className, children, ...props }) => {
-              if (inline) {
-                return (
-                  <code
-                    className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono text-foreground"
-                    {...props}
-                  >
-                    {children}
-                  </code>
-                );
-              }
+            code: ({ node, className, children, ...props }) => {
               return (
                 <code
                   className={cn(

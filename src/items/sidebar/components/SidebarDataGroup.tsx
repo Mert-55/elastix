@@ -1,13 +1,18 @@
-import { type GroupItems } from '@/common/ui/SidebarGroupItems';
-import SidebarGroupCathegory from './SidebarGroupCathegory';
+import type { TranslatableGroupItems } from '@/common/types';
+import { TranslatableSidebarGroupItems } from '@/common/ui/TranslatableSidebarGroupItems';
+import SidebarGroupCategory from '@/items/sidebar/components/SidebarGroupCategory';
 
 export default function SidebarDataGroup() {
-  return <SidebarGroupCathegory label={dataLabel} items={dataItems} />;
+  return (
+    <SidebarGroupCategory label={dataLabel}>
+      <TranslatableSidebarGroupItems items={dataItems} />
+    </SidebarGroupCategory>
+  );
 }
 
 const dataLabel = 'dashboard.sidebar.data.label';
 
-const dataItems: GroupItems = [
+const dataItems: TranslatableGroupItems = [
   {
     title: 'dashboard.sidebar.data.customer.title',
     icon: 'customer-data',

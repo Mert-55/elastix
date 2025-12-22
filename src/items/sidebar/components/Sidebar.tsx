@@ -1,21 +1,38 @@
 import { useActiveDashboard } from '@/app/providers/ActiveDashboardProvider';
 import { DashboardId } from '@/common/types/DashboardIds';
-import { Sidebar as Base, SidebarContent } from '@/common/ui/sidebar';
+import { Sidebar as ShadncSidebar, SidebarContent } from '@/common/ui/sidebar';
+import SidebarSimulationsCategory from '@/items/sidebar/components/SidebarSimulationsCategory';
+import SidebarActionsGroup from './SidebarActionsGroup';
 import SidebarDataGroup from './SidebarDataGroup';
 import SidebarRFMSegmentationGroup from './SidebarRFMSegmentationGroup';
-import SidebarSimulationGroup from './SidebarSimulationGroup';
 
 export default function Sidebar() {
   const { activeDashboard } = useActiveDashboard();
   const onSimulation = activeDashboard === DashboardId.Simulation;
-  return (
-    <Base>
-      <SidebarContent>
-        {/* Go back to current simulation, later */}
-        {onSimulation && <SidebarSimulationGroup />}
-        {!onSimulation && <SidebarRFMSegmentationGroup />}
-        {!onSimulation && <SidebarDataGroup />}
-      </SidebarContent>
-    </Base>
+
+  const Content = ({ children }: { children: React.ReactNode }) => (
+    <ShadncSidebar>
+      <SidebarContent>{children}</SidebarContent>
+    </ShadncSidebar>
+  );
+
+  const SimulationSidebarContent = () => (
+    <Content>
+      <SidebarActionsGroup />
+      <SidebarSimulationsCategory />
+    </Content>
+  );
+
+  const RFMDashboardSidebarContent = () => (
+    <Content>
+      <SidebarRFMSegmentationGroup />
+      <SidebarDataGroup />
+    </Content>
+  );
+
+  return onSimulation ? (
+    <SimulationSidebarContent />
+  ) : (
+    <RFMDashboardSidebarContent />
   );
 }

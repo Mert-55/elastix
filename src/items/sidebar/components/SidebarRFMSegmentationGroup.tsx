@@ -1,19 +1,19 @@
+import type { TranslatableGroupItems } from '@/common/types';
 import { DashboardId } from '@/common/types/DashboardIds';
-import { type GroupItems } from '@/common/ui/SidebarGroupItems';
-import SidebarGroupCathegory from './SidebarGroupCathegory';
+import { TranslatableSidebarGroupItems } from '@/common/ui/TranslatableSidebarGroupItems';
+import SidebarGroupCategory from '@/items/sidebar/components/SidebarGroupCategory';
 
 export default function SidebarRFMSegmentationGroup() {
   return (
-    <SidebarGroupCathegory
-      label={segmentationLabel}
-      items={segmentationItems}
-    />
+    <SidebarGroupCategory label={segmentationLabel}>
+      <TranslatableSidebarGroupItems items={segmentationItems} />
+    </SidebarGroupCategory>
   );
 }
 
 const segmentationLabel = 'dashboard.sidebar.segmentation.label';
 
-const segmentationItems: GroupItems = [
+const segmentationItems: TranslatableGroupItems = [
   {
     id: DashboardId.RFMElasticity,
     title: 'dashboard.segmentation.rfm-elasticity.title',
