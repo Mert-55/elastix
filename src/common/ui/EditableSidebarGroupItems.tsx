@@ -7,8 +7,10 @@ import { SidebarGroupContent, SidebarMenu } from './sidebar';
 
 export function EditableSidebarGroupItems({
   items,
+  children,
 }: {
   items: EditableGroupItems;
+  children?: React.ReactNode;
 }) {
   const { activeDashboard, setActiveDashboard } = useActiveDashboard();
   const [viewMore, setViewMore] = useState(true);
@@ -24,7 +26,9 @@ export function EditableSidebarGroupItems({
             item={item}
             activeDashboard={activeDashboard}
             onSelect={setActiveDashboard}
-          />
+          >
+            {children}
+          </EditableSidebarMenuItem>
         ))}
         {hasMoreItems && (
           <MoreOrLessMenuItems
