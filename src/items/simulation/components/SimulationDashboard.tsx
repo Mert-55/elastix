@@ -30,7 +30,7 @@ Dieses Dashboard ermöglicht die **Simulation** verschiedener Szenarien.
     <div
       className={cn(tokens.dashboardMaxWidth, 'w-full mx-auto overflow-y-auto')}
     >
-      {isEditing || !!!description ? (
+      {isEditing || !description ? (
         <EditableDashboardDescription isEditing={isEditing} />
       ) : (
         <Accordion
