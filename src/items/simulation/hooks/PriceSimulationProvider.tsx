@@ -125,7 +125,7 @@ export function PriceSimulationProvider({ children }: { children: ReactNode }) {
 
   const dataPoints = useMemo(
     () => generateDataPoints(settings),
-    [settings]
+    [settings.lowerBound, settings.upperBound, settings.step]
   );
 
   const updateSettings = (newSettings: Partial<SimulationSettings>) => {
