@@ -25,11 +25,11 @@ const generateSegmentData = (
   segmentId: RFMSegmentIds,
   baseQuantity: number,
   baseRevenue: number,
-  priceElasticity: number
+  elasticity: number
 ): PriceSimulationDataPoint[] => {
   return priceChangePoints.map((priceChange) => {
     // Quantity changes inversely with price (elasticity factor)
-    const quantityChangePercent = -priceChange * priceElasticity;
+    const quantityChangePercent = -priceChange * elasticity;
     const quantity = baseQuantity * (1 + quantityChangePercent / 100);
 
     // Revenue is affected by both price and quantity changes
