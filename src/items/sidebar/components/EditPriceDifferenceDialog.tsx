@@ -30,27 +30,42 @@ export default function EditPriceDifferenceDialog({
   );
   const [step, setStep] = useState(initialSettings?.step ?? 5);
   const [error, setError] = useState<string | null>(null);
+  const formatText = useFormatText();
 
   const handleSave = () => {
     // Simple validation
     if (lowerBound < -30) {
-      setError('Lower bound cannot be less than -30%');
+      setError(
+        formatText(
+          'items.sidebar.editPriceDifference.lowerBoundMinError',
+          { min: -30 }
+        )
+      );
       return;
     }
     if (upperBound > 30) {
-      setError('Upper bound cannot be greater than 30%');
-      return;
-    }
     if (lowerBound >= upperBound) {
-      setError('Lower bound must be less than upper bound');
+      setError(
+        formatText(
+          'items.sidebar.editPriceDifference.lowerLessThanUpperError'
+        )
+      );
       return;
     }
     if (step <= 0) {
-      setError('Step must be greater than 0');
+      setError(
+        formatText(
+          'items.sidebar.editPriceDifference.stepPositiveError'
+        )
+      );
       return;
     }
     if (step > upperBound - lowerBound) {
-      setError('Step is too large for the given range');
+      setError(
+        formatText(
+          'items.sidebar.editPriceDifference.stepTooLargeError'
+        )
+      );
       return;
     }
 

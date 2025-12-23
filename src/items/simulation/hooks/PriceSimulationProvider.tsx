@@ -77,8 +77,40 @@ export function PriceSimulationProvider({ children }: { children: ReactNode }) {
     step: number
   ): number[] => {
     const points: number[] = [];
-    for (let price = lowerBound; price <= upperBound; price += step) {
+
+    // Avoid infinite loop if step is zero
+    if (step === 0) {
+      if (!Number.isNaN(lowerBound)) {
+        points.push(lowerBound);
+      }
+      if (
+        !Number.isNaN(upperBound) &&
+        (points.length === 0 || Math.abs(points[points.length - 1] - upperBound) > 1e-9)
+      ) {
+        points.push(upperBound);
+      }
+      return points;
+    }
+
+    const epsilon = 1e-9;
+    // Generate points using an integer index to limit floating-point accumulation
+    for (let i = 0; ; i++) {
+      const price = lowerBound + i * step;
+      if (step > 0) {
+        if (price > upperBound + epsilon) break;
+      } else {
+        if (price < upperBound - epsilon) break;
+      }
       points.push(price);
+    }
+
+    // Ensure the upperBound is included when appropriate
+    if (
+      !Number.isNaN(upperBound) &&
+      (points.length === 0 ||
+        Math.abs(points[points.length - 1] - upperBound) > epsilon)
+    ) {
+      points.push(upperBound);
     }
     return points;
   };
