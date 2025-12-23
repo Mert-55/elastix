@@ -46,6 +46,11 @@ export default function PriceSimulationChart({
   });
   const lostLabel = useFormatText({ id: 'rfm.segment.lost.text' });
 
+  const titleLabel = useFormatText({ id: 'simulation.priceImpact.title' });
+  const descriptionLabel = useFormatText({
+    id: 'simulation.priceImpact.description',
+  });
+
   const segmentLabels: Record<RFMSegmentIds, string> = {
     [RFMSegmentIds.Champion]: championLabel,
     [RFMSegmentIds.LoyalCustomers]: loyalLabel,
@@ -114,12 +119,8 @@ export default function PriceSimulationChart({
     <Card className="py-4 sm:py-0">
       <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pb-3 sm:pb-0">
-          <CardTitle>
-            {useFormatText({ id: 'simulation.priceImpact.title' })}
-          </CardTitle>
-          <CardDescription>
-            {useFormatText({ id: 'simulation.priceImpact.description' })}
-          </CardDescription>
+          <CardTitle>{titleLabel}</CardTitle>
+          <CardDescription>{descriptionLabel}</CardDescription>
         </div>
         <div className="flex flex-wrap">
           {segmentTotals.map(({ segmentId, quantity, revenue }) => (
