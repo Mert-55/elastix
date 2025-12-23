@@ -15,6 +15,14 @@ import { Input } from '@/common/ui/input';
 import type { SimulationSettings } from '@/items/simulation/hooks/usePriceSimulationSettings';
 import { useState } from 'react';
 
+interface EditPriceDifferenceDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  itemName: string;
+  onSave: (settings: SimulationSettings) => void;
+  initialSettings?: SimulationSettings;
+}
+
 export default function EditPriceDifferenceDialog({
   open,
   onOpenChange,
@@ -30,42 +38,74 @@ export default function EditPriceDifferenceDialog({
   );
   const [step, setStep] = useState(initialSettings?.step ?? 5);
   const [error, setError] = useState<string | null>(null);
-  const formatText = useFormatText();
+
+  const lowerBoundMinError = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.lowerBoundMinError',
+    values: { min: -30 },
+  });
+  const upperBoundMaxError = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.upperBoundMaxError',
+    values: { max: 30 },
+  });
+  const lowerLessThanUpperError = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.lowerLessThanUpperError',
+  });
+  const stepPositiveError = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.stepPositiveError',
+  });
+  const stepTooLargeError = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.stepTooLargeError',
+  });
+  const dialogTitle = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.title',
+  });
+  const dialogDescription = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.description',
+    values: { itemName },
+  });
+  const lowerBoundLabel = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.lowerBound',
+  });
+  const lowerBoundPlaceholder = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.lowerBoundPlaceholder',
+  });
+  const upperBoundLabel = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.upperBound',
+  });
+  const upperBoundPlaceholder = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.upperBoundPlaceholder',
+  });
+  const stepLabel = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.step',
+  });
+  const stepPlaceholder = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.stepPlaceholder',
+  });
+  const cancelText = useFormatText({ id: 'common.cancel' });
+  const saveText = useFormatText({
+    id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.save',
+  });
 
   const handleSave = () => {
     // Simple validation
     if (lowerBound < -30) {
-      setError(
-        formatText(
-          'items.sidebar.editPriceDifference.lowerBoundMinError',
-          { min: -30 }
-        )
-      );
+      setError(lowerBoundMinError);
       return;
     }
     if (upperBound > 30) {
+      setError(upperBoundMaxError);
+      return;
+    }
     if (lowerBound >= upperBound) {
-      setError(
-        formatText(
-          'items.sidebar.editPriceDifference.lowerLessThanUpperError'
-        )
-      );
+      setError(lowerLessThanUpperError);
       return;
     }
     if (step <= 0) {
-      setError(
-        formatText(
-          'items.sidebar.editPriceDifference.stepPositiveError'
-        )
-      );
+      setError(stepPositiveError);
       return;
     }
     if (step > upperBound - lowerBound) {
-      setError(
-        formatText(
-          'items.sidebar.editPriceDifference.stepTooLargeError'
-        )
-      );
+      setError(stepTooLargeError);
       return;
     }
 
@@ -80,74 +120,49 @@ export default function EditPriceDifferenceDialog({
           <DialogTitle>
             <div className="flex items-center gap-2">
               <Icon name="badge-percent" className="size-5" />
-              {useFormatText({
-                id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.title',
-              })}
+              {dialogTitle}
             </div>
           </DialogTitle>
-          <DialogDescription>
-            {useFormatText({
-              id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.description',
-              values: { itemName },
-            })}
-          </DialogDescription>
+          <DialogDescription>{dialogDescription}</DialogDescription>
         </DialogHeader>
         <FieldGroup className="py-3 gap-4">
           <Field>
-            <FieldLabel htmlFor="lowerBound">
-              {useFormatText({
-                id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.lowerBound',
-              })}
-            </FieldLabel>
+            <FieldLabel htmlFor="lowerBound">{lowerBoundLabel}</FieldLabel>
             <Input
               id="lowerBound"
               name="lowerBound"
               type="number"
               value={lowerBound}
               onChange={(e) => setLowerBound(Number(e.target.value))}
-              placeholder={useFormatText({
-                id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.lowerBoundPlaceholder',
-              })}
+              placeholder={lowerBoundPlaceholder}
               className="rounded-xl font-mono"
               min="-30"
               max="0"
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="upperBound">
-              {useFormatText({
-                id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.upperBound',
-              })}
-            </FieldLabel>
+            <FieldLabel htmlFor="upperBound">{upperBoundLabel}</FieldLabel>
             <Input
               id="upperBound"
               name="upperBound"
               type="number"
               value={upperBound}
               onChange={(e) => setUpperBound(Number(e.target.value))}
-              placeholder={useFormatText({
-                id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.upperBoundPlaceholder',
-              })}
+              placeholder={upperBoundPlaceholder}
               className="rounded-xl font-mono"
               min="0"
               max="30"
             />
           </Field>
           <Field>
-            <FieldLabel htmlFor="step">
-              {useFormatText({
-                id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.step',
-              })}
-            </FieldLabel>
+            <FieldLabel htmlFor="step">{stepLabel}</FieldLabel>
             <Input
               id="step"
               name="step"
               type="number"
               value={step}
               onChange={(e) => setStep(Number(e.target.value))}
-              placeholder={useFormatText({
-                id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.stepPlaceholder',
-              })}
+              placeholder={stepPlaceholder}
               className="rounded-xl font-mono"
               min="1"
             />
@@ -157,24 +172,14 @@ export default function EditPriceDifferenceDialog({
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline" className="rounded-xl">
-              {useFormatText({ id: 'common.cancel' })}
+              {cancelText}
             </Button>
           </DialogClose>
           <Button type="submit" className="rounded-xl" onClick={handleSave}>
-            {useFormatText({
-              id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.save',
-            })}
+            {saveText}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
-}
-
-interface EditPriceDifferenceDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  itemName: string;
-  onSave: (settings: SimulationSettings) => void;
-  initialSettings?: SimulationSettings;
 }

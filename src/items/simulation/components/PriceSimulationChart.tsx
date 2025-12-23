@@ -115,11 +115,6 @@ export default function PriceSimulationChart({
     [dataPoints]
   );
 
-  const titleText = useFormatText({ id: 'simulation.priceImpact.title' });
-  const descriptionText = useFormatText({
-    id: 'simulation.priceImpact.description',
-  });
-
   return (
     <Card className="py-4 sm:py-0">
       <CardHeader className="flex flex-col items-stretch border-b !p-0 sm:flex-row">
