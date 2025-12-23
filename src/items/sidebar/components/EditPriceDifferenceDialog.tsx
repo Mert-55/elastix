@@ -44,14 +44,6 @@ export default function EditPriceDifferenceDialog({
       return;
     }
     if (upperBound > 30) {
-      setError(
-        formatText(
-          'items.sidebar.editPriceDifference.upperBoundMaxError',
-          { max: 30 }
-        )
-      );
-      return;
-    }
     if (lowerBound >= upperBound) {
       setError(
         formatText(
