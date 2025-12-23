@@ -3,13 +3,16 @@ import { I18nProvider } from '@/app/providers/I18nProvider';
 import { ThemeProvider } from '@/app/providers/ThemeProvider';
 import { SidebarProvider } from '@/common/ui/sidebar';
 import { TooltipProvider } from '@/common/ui/tooltip';
+import { PriceSimulationProvider } from '@/items/simulation/hooks/PriceSimulationProvider';
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => (
   <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     <I18nProvider>
       <TooltipProvider>
         <ActiveDashboardProvider>
-          <SidebarProvider>{children}</SidebarProvider>
+          <PriceSimulationProvider>
+            <SidebarProvider>{children}</SidebarProvider>
+          </PriceSimulationProvider>
         </ActiveDashboardProvider>
       </TooltipProvider>
     </I18nProvider>

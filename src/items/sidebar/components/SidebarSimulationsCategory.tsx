@@ -21,31 +21,31 @@ const simulationsAction: CategoryAction = {
 };
 const simulationItems: EditableGroupItems = [
   {
-    title: 'Untitled Simulation',
+    title: 'Untitled Simulation 1',
     icon: 'elasticity-segmentation',
   },
   {
-    title: 'Untitled Simulation',
+    title: 'Untitled Simulation 2',
     icon: 'elasticity-segmentation',
   },
   {
-    title: 'Untitled Simulation',
+    title: 'Untitled Simulation 3',
     icon: 'elasticity-segmentation',
   },
   {
-    title: 'Untitled Simulation',
+    title: 'Untitled Simulation 4',
     icon: 'elasticity-segmentation',
   },
   {
-    title: 'Untitled Simulation',
+    title: 'Untitled Simulation 5',
     icon: 'elasticity-segmentation',
   },
   {
-    title: 'Untitled Simulation',
+    title: 'Untitled Simulation 6',
     icon: 'elasticity-segmentation',
   },
   {
-    title: 'Untitled Simulation',
+    title: 'Untitled Simulation 7',
     icon: 'elasticity-segmentation',
   },
 ];
