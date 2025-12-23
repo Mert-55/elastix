@@ -1,6 +1,6 @@
 import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import type { PriceSimulationDataPoint } from '@/items/simulation/types/PriceSimulationData';
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
 
 export interface SimulationSettings {
   lowerBound: number;
@@ -123,7 +123,10 @@ export function PriceSimulationProvider({ children }: { children: ReactNode }) {
     return dataPoints;
   };
 
-  const dataPoints = generateDataPoints(settings);
+  const dataPoints = useMemo(
+    () => generateDataPoints(settings),
+    [settings]
+  );
 
   const updateSettings = (newSettings: Partial<SimulationSettings>) => {
     setSettings((prev) => ({ ...prev, ...newSettings }));
