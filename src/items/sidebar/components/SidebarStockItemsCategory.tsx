@@ -4,11 +4,13 @@ import { EditableSidebarGroupItems } from '@/common/ui/EditableSidebarGroupItems
 import EditPriceDifferenceDialog from '@/items/sidebar/components/EditPriceDifferenceDialog';
 import SidebarGroupCategory from '@/items/sidebar/components/SidebarGroupCategory';
 import StockItemActionsDropdown from '@/items/sidebar/components/StockItemActionsDropdown';
+import { usePriceSimulation } from '@/items/simulation/hooks/PriceSimulationProvider';
 import { useState } from 'react';
 
 export default function SidebarStockItemsCategory() {
   const [showPriceDifferenceDialog, setShowPriceDifferenceDialog] =
     useState(false);
+  const { settings, updateSettings } = usePriceSimulation();
 
   const handleEditPriceDifference = () => {
     setShowPriceDifferenceDialog(true);
@@ -18,8 +20,8 @@ export default function SidebarStockItemsCategory() {
     // TODO: Implement remove item logic
   };
 
-  const handleSavePriceDifference = () => {
-    // TODO: Implement save logic
+  const handleSavePriceDifference = (newSettings: typeof settings) => {
+    updateSettings(newSettings);
     setShowPriceDifferenceDialog(false);
   };
 
@@ -41,6 +43,7 @@ export default function SidebarStockItemsCategory() {
         onOpenChange={setShowPriceDifferenceDialog}
         itemName="the selected stock item"
         onSave={handleSavePriceDifference}
+        initialSettings={settings}
       />
     </>
   );
@@ -56,7 +59,7 @@ const stockItemLabel: MessageId =
   'dashboard.sidebar.simulations.stockItems.label';
 const stockItemItems: EditableGroupItems = [
   {
-    title: 'Untitled Stock Item',
+    title: 'Untitled Simulation 1',
     icon: 'boxes',
   },
   {
