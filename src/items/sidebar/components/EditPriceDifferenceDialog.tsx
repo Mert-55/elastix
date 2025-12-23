@@ -12,7 +12,7 @@ import {
 import { Field, FieldGroup, FieldLabel } from '@/common/ui/field';
 import { Icon } from '@/common/ui/icon';
 import { Input } from '@/common/ui/input';
-import type { SimulationSettings } from '@/items/simulation/hooks/usePriceSimulationSettings';
+import type { SimulationSettings } from '@/items/simulation/hooks/PriceSimulationProvider';
 import { useState } from 'react';
 
 export default function EditPriceDifferenceDialog({
