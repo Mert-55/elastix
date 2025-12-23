@@ -1,11 +1,15 @@
 import type { TranslatableText } from '@/common/types/TranslatableText';
-import type { TooltipProps } from '@radix-ui/react-tooltip';
+import type {
+  TooltipContentProps,
+  TooltipProps,
+} from '@radix-ui/react-tooltip';
 import { useMemo } from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip';
 
 export function OptionalTooltip({
   children,
   tooltip,
+  side,
   suppressAsChild = false,
   destructive = false,
   ...rest
@@ -23,7 +27,10 @@ export function OptionalTooltip({
   return (
     <Tooltip {...rest}>
       <TooltipTrigger asChild={!suppressAsChild}>{children}</TooltipTrigger>
-      <TooltipContent className={destructive ? 'text-destructive' : ''}>
+      <TooltipContent
+        className={destructive ? 'text-destructive' : ''}
+        side={side}
+      >
         {tooltipText}
       </TooltipContent>
     </Tooltip>
@@ -35,4 +42,5 @@ export type OptionalTooltip = {
   suppressAsChild?: boolean;
   tooltip?: string | TranslatableText;
   destructive?: boolean;
+  side?: TooltipContentProps['side'];
 } & TooltipProps;
