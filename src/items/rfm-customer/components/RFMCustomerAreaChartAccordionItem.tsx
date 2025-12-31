@@ -5,7 +5,7 @@ import RFMAreaChart from '@/items/rfm-customer/components/SegmentAreaChart/Segme
 export default function RFMCustomerAreaChartAccordionItem() {
   return (
     <DashboardAccordionSection
-      titleId="rfm.customer.area-chart.title"
+      titleTranslatable="rfm.customer.area-chart.title"
       icon="revenue-segmentation"
       value="customer-area-chart"
     >

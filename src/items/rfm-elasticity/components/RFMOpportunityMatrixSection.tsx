@@ -16,7 +16,7 @@ export default function RFMOpportunityMatrixSection() {
     >
       <DashboardAccordionSection
         value="item-opportunity"
-        titleId="rfm.accordion.opportunity.title"
+        titleTranslatable="rfm.accordion.opportunity.title"
         className="flex-1 min-h-full"
       >
         <OpportunityMatrix activeSegmentId={activeSegment} />

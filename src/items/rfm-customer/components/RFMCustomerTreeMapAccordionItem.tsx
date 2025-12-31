@@ -6,7 +6,7 @@ import SegmentTreeMap from './SegmentTreeMap';
 export default function RFMCustomerTreeMapAccordionItem() {
   return (
     <DashboardAccordionSection
-      titleId="rfm.customer.tree-map.title"
+      titleTranslatable="rfm.customer.tree-map.title"
       icon="customer-segmentation"
       value="segment-tree-map"
     >

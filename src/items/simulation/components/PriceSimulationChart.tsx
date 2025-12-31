@@ -16,16 +16,14 @@ import {
 import { getColorBySegmentId } from '@/items/rfm-customer/config/areaChartConfig';
 import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import type { PriceSimulationDataPoint } from '@/items/simulation/types/PriceSimulationData';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { CartesianGrid, Legend, Line, LineChart, XAxis, YAxis } from 'recharts';
 
 export default function PriceSimulationChart({
   dataPoints,
+  activeSegment,
+  onActiveSegmentChange,
 }: PriceSimulationChartProps) {
-  const [activeSegment, setActiveSegment] = useState<RFMSegmentIds>(
-    RFMSegmentIds.Champion
-  );
-
   const quantityLabel = useFormatText({
     id: 'simulation.priceImpact.yAxis.quantity',
   });
@@ -132,7 +130,7 @@ export default function PriceSimulationChart({
                 'data-[active=true]:bg-muted/50 flex flex-1 flex-col justify-center gap-1 border-t px-4 py-3 text-left sm:border-t-0 sm:border-l sm:px-6 sm:py-4 min-w-[120px]',
                 'hover:bg-muted/30 transition-colors'
               )}
-              onClick={() => setActiveSegment(segmentId)}
+              onClick={() => onActiveSegmentChange(segmentId)}
               style={{
                 borderLeftColor:
                   activeSegment === segmentId
@@ -262,6 +260,8 @@ export default function PriceSimulationChart({
   );
 }
 
-interface PriceSimulationChartProps {
+type PriceSimulationChartProps = {
   dataPoints: PriceSimulationDataPoint[];
-}
+  activeSegment: RFMSegmentIds;
+  onActiveSegmentChange: (segment: RFMSegmentIds) => void;
+};

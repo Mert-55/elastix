@@ -1,6 +1,6 @@
 import { useFormatText } from '@/common/hooks/useFormatText';
-import type { MessageId } from '@/common/i18n';
 import { cn } from '@/common/lib/utils';
+import { resolveTranslatableText, type TranslatableText } from '@/common/types';
 import {
   AccordionContent,
   AccordionItem,
@@ -17,7 +17,7 @@ export interface DashboardAccordionSectionProps extends Omit<
   /** Eindeutige ID für das Accordion Item */
   value: string;
   /** i18n Message ID für den Titel */
-  titleId: MessageId;
+  titleTranslatable: TranslatableText;
   /** Optionale Werte für die Übersetzung (z.B. {segment: 'Champions'}) */
   titleValues?: Record<string, string | number>;
   /** Optionales Icon für den Titel */
@@ -32,14 +32,14 @@ export interface DashboardAccordionSectionProps extends Omit<
  */
 export default function DashboardAccordionSection({
   value,
-  titleId,
+  titleTranslatable,
   titleValues,
   children,
   className,
   icon,
   ...props
 }: DashboardAccordionSectionProps) {
-  const title = useFormatText({ id: titleId, values: titleValues });
+  const title = useFormatText(resolveTranslatableText(titleTranslatable));
 
   return (
     <AccordionItem
