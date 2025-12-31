@@ -19,14 +19,14 @@ export default function RFMActionsSegmentsSection() {
       <div>
         <DashboardAccordionSection
           value="item-actions"
-          titleId="rfm.accordion.action.title"
+          titleTranslatable="rfm.accordion.action.title"
         >
           <RFMSimulationActionItem />
         </DashboardAccordionSection>
 
         <DashboardAccordionSection
           value="item-segments"
-          titleId="rfm.accordion.segments.title"
+          titleTranslatable="rfm.accordion.segments.title"
         >
           <SegmentToggleGroup
             value={activeSegment}

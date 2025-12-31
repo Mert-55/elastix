@@ -12,6 +12,7 @@ export interface RFMKPISectionProps {
  */
 export default function RFMKPISection({ segmentName }: RFMKPISectionProps) {
   const { activeSegment } = useRFMSegment();
+
   return (
     <Accordion
       type="multiple"
@@ -20,8 +21,10 @@ export default function RFMKPISection({ segmentName }: RFMKPISectionProps) {
     >
       <DashboardAccordionSection
         value="item-kpi"
-        titleId="rfm.accordion.kpi.title"
-        titleValues={{ segment: segmentName ?? '' }}
+        titleTranslatable={{
+          id: 'rfm.accordion.kpi.title',
+          values: { segment: segmentName ?? '' },
+        }}
       >
         <SegmentKPIOverview activeSegmentId={activeSegment} />
       </DashboardAccordionSection>

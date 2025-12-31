@@ -1,6 +1,12 @@
 import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import type { PriceSimulationDataPoint } from '@/items/simulation/types/PriceSimulationData';
-import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+} from 'react';
 
 export interface SimulationSettings {
   lowerBound: number;
@@ -85,7 +91,8 @@ export function PriceSimulationProvider({ children }: { children: ReactNode }) {
       }
       if (
         !Number.isNaN(upperBound) &&
-        (points.length === 0 || Math.abs(points[points.length - 1] - upperBound) > 1e-9)
+        (points.length === 0 ||
+          Math.abs(points[points.length - 1] - upperBound) > 1e-9)
       ) {
         points.push(upperBound);
       }
@@ -112,6 +119,13 @@ export function PriceSimulationProvider({ children }: { children: ReactNode }) {
     ) {
       points.push(upperBound);
     }
+
+    // Always include 0% as baseline if within range
+    if (lowerBound <= 0 && upperBound >= 0 && !points.includes(0)) {
+      points.push(0);
+      points.sort((a, b) => a - b);
+    }
+
     return points;
   };
 
