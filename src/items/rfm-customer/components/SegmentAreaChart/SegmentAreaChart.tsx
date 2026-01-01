@@ -63,7 +63,7 @@ export default function RFMAreaChart() {
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 font-mono">
         <ChartContainer
           config={rfmSegmentAreaChartConfig(getRFMSegmentLabels())}
-          className="aspect-auto h-auto w-full"
+          className="aspect-auto h-80 w-full"
         >
           <AreaChart
             data={filteredData}
