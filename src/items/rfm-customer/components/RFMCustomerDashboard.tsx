@@ -7,11 +7,11 @@ import { Accordion } from '@radix-ui/react-accordion';
 export default function RFMCustomerDashboard() {
   return (
     <Accordion
-      type="single"
-      defaultValue={'segment-tree-map'}
+      type="multiple"
+      defaultValue={['segment-tree-map', 'customer-area-chart']}
       className={cn(
         tokens.dashboardMaxWidth,
-        'w-full h-auto mx-auto px-6 pb-6 md:overflow-hidden'
+        'w-full h-auto mx-auto px-6 pb-6 overflow-y-scroll'
       )}
     >
       <RFMCustomerTreeMapAccordionItem />
