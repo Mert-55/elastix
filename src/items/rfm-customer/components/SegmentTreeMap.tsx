@@ -27,15 +27,6 @@ import { SegmentTreeMapTooltip } from './SegmentTreeMapTooltip';
 import { TreeMapHoveredLayer } from './TreeMapHoveredLayer';
 import { TreeMapNodeComponent } from './TreeMapNodeComponent';
 
-export interface SegmentTreeMapProps {
-  /** Segment data from API */
-  data: SegmentData[];
-  /** Optional className for container */
-  className?: string;
-  /** Callback when a segment is clicked */
-  onSegmentClick?: (segment: SegmentData) => void;
-}
-
 /**
  * SegmentTreeMap - Visualizes customer segments as a treemap
  *
@@ -182,3 +173,12 @@ export default function SegmentTreeMap({
     </div>
   );
 }
+
+export type SegmentTreeMapProps = {
+  /** Segment data from API */
+  data: SegmentData[];
+  /** Optional className for container */
+  className?: string;
+  /** Callback when a segment is clicked */
+  onSegmentClick?: (segment: SegmentData) => void;
+};
