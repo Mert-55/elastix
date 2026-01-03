@@ -1,3 +1,4 @@
+import { useSimulationContext } from '@/app/controller/SimulationProvider';
 import { Card } from '@/common/ui/card';
 import { Slider } from '@/common/ui/slider';
 import type { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
@@ -5,7 +6,6 @@ import MetricsPanelInteractivePieChart from '@/items/simulation/components/Metri
 import MetricsPanelSegmentBarChart from '@/items/simulation/components/MetricsPanelSegmentBarChart';
 import MetricsPanelStackedRadialChart from '@/items/simulation/components/MetricsPanelStackedRadialChart';
 import MetricsPanelToggleGroup from '@/items/simulation/components/MetricsPanelToggleGroup';
-import { usePriceSimulation } from '@/items/simulation/hooks/PriceSimulationProvider';
 import type { MetricsMode } from '@/items/simulation/types';
 import { useState } from 'react';
 import MetricsDisplay from './MetricsDisplay';
@@ -13,10 +13,17 @@ import MetricsDisplay from './MetricsDisplay';
 export default function SimulationMetricsPanelSection({
   activeSegment,
 }: SimulationMetricsPanelSectionProps) {
-  const { settings } = usePriceSimulation();
+  const { activeSimulation } = useSimulationContext();
   const [priceChangePercent, setPriceChangePercent] =
     useState(DEFAULT_PRICE_CHANGE);
   const [mode, setMode] = useState<MetricsMode>('revenue');
+
+  // Get price range from active simulation or use defaults
+  const priceRange = activeSimulation?.priceRange ?? {
+    from: -20,
+    to: 20,
+    step: 5,
+  };
 
   return (
     <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 w-full pb-2">
@@ -25,9 +32,9 @@ export default function SimulationMetricsPanelSection({
           <div className="pr-6 grid subgrid-cols-1 py-0 h-full">
             <Slider
               defaultValue={[DEFAULT_PRICE_CHANGE]}
-              max={settings.upperBound}
-              min={settings.lowerBound}
-              step={settings.step}
+              max={priceRange.to}
+              min={priceRange.from}
+              step={priceRange.step}
               onValueChange={(value) => setPriceChangePercent(value[0])}
               className="w-auto"
               variant={priceChangePercent < 0 ? 'destructive' : 'primary'}
@@ -35,8 +42,8 @@ export default function SimulationMetricsPanelSection({
           </div>
           <MetricsDisplay
             currentValue={priceChangePercent}
-            lowerBound={settings.lowerBound}
-            upperBound={settings.upperBound}
+            lowerBound={priceRange.from}
+            upperBound={priceRange.to}
           />
         </Card>
         <MetricsPanelToggleGroup

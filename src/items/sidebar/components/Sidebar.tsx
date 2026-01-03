@@ -2,7 +2,6 @@ import { useActiveDashboard } from '@/app/providers/ActiveDashboardProvider';
 import { DashboardId } from '@/common/types/DashboardIds';
 import { Sidebar as ShadncSidebar, SidebarContent } from '@/common/ui/sidebar';
 import SidebarSimulationsCategory from '@/items/sidebar/components/SidebarSimulationsCategory';
-import SidebarStockItemsCategory from '@/items/sidebar/components/SidebarStockItemsCategory';
 import SidebarActionsGroup from './SidebarActionsGroup';
 import SidebarDataGroup from './SidebarDataGroup';
 import SidebarRFMSegmentationGroup from './SidebarRFMSegmentationGroup';
@@ -21,7 +20,6 @@ export default function Sidebar() {
     <Content>
       <SidebarActionsGroup />
       <SidebarSimulationsCategory />
-      <SidebarStockItemsCategory />
     </Content>
   );
 

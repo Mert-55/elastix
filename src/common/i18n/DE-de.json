@@ -136,5 +136,11 @@
   "rfm.segment.loyal.text": "Loyal",
   "rfm.segment.loyal.tooltip": "Nicht kürzlich gekauft, regelmäßig gekauft, mittlerer Umsatz",
   "rfm.segment.potential.text": "Potenzial",
-  "rfm.segment.potential.tooltip": "Kürzlich gekauft, unregelmäßig gekauft, mittlerer Umsatz"
+  "rfm.segment.potential.tooltip": "Kürzlich gekauft, unregelmäßig gekauft, mittlerer Umsatz",
+  "simulation.sidebar.actions.editConfig": "Preisspanne bearbeiten",
+  "simulation.sidebar.actions.changeStockItem": "Artikel ändern",
+  "simulation.sidebar.actions.delete": "Simulation löschen",
+  "simulation.stockItemPicker.title": "Artikel auswählen",
+  "simulation.stockItemPicker.description": "Wählen Sie einen Artikel für die Preissimulation aus.",
+  "common.select": "Auswählen"
 }

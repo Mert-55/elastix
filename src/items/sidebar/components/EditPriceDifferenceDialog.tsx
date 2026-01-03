@@ -13,15 +13,7 @@ import { Field, FieldGroup, FieldLabel } from '@/common/ui/field';
 import { Icon } from '@/common/ui/icon';
 import { Input } from '@/common/ui/input';
 import type { SimulationSettings } from '@/items/simulation/hooks/PriceSimulationProvider';
-import { useState } from 'react';
-
-interface EditPriceDifferenceDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  itemName: string;
-  onSave: (settings: SimulationSettings) => void;
-  initialSettings?: SimulationSettings;
-}
+import { useEffect, useState } from 'react';
 
 export default function EditPriceDifferenceDialog({
   open,
@@ -38,6 +30,16 @@ export default function EditPriceDifferenceDialog({
   );
   const [step, setStep] = useState(initialSettings?.step ?? 5);
   const [error, setError] = useState<string | null>(null);
+
+  // Reset form values when dialog opens or initialSettings change
+  useEffect(() => {
+    if (open && initialSettings) {
+      setLowerBound(initialSettings.lowerBound);
+      setUpperBound(initialSettings.upperBound);
+      setStep(initialSettings.step);
+      setError(null);
+    }
+  }, [open, initialSettings]);
 
   const lowerBoundMinError = useFormatText({
     id: 'dashboard.sidebar.simulations.stockItems.priceDifferenceDialog.lowerBoundMinError',
@@ -115,7 +117,7 @@ export default function EditPriceDifferenceDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] rounded-xl">
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>
             <div className="flex items-center gap-2">
@@ -135,7 +137,7 @@ export default function EditPriceDifferenceDialog({
               value={lowerBound}
               onChange={(e) => setLowerBound(Number(e.target.value))}
               placeholder={lowerBoundPlaceholder}
-              className="rounded-xl font-mono"
+              className="font-mono"
               min="-30"
               max="0"
             />
@@ -149,7 +151,7 @@ export default function EditPriceDifferenceDialog({
               value={upperBound}
               onChange={(e) => setUpperBound(Number(e.target.value))}
               placeholder={upperBoundPlaceholder}
-              className="rounded-xl font-mono"
+              className="font-mono"
               min="0"
               max="30"
             />
@@ -163,7 +165,7 @@ export default function EditPriceDifferenceDialog({
               value={step}
               onChange={(e) => setStep(Number(e.target.value))}
               placeholder={stepPlaceholder}
-              className="rounded-xl font-mono"
+              className="font-mono"
               min="1"
             />
           </Field>
@@ -171,11 +173,9 @@ export default function EditPriceDifferenceDialog({
         </FieldGroup>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline" className="rounded-xl">
-              {cancelText}
-            </Button>
+            <Button variant="outline">{cancelText}</Button>
           </DialogClose>
-          <Button type="submit" className="rounded-xl" onClick={handleSave}>
+          <Button type="submit" onClick={handleSave}>
             {saveText}
           </Button>
         </DialogFooter>
@@ -183,3 +183,11 @@ export default function EditPriceDifferenceDialog({
     </Dialog>
   );
 }
+
+type EditPriceDifferenceDialogProps = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  itemName: string;
+  onSave: (settings: SimulationSettings) => void;
+  initialSettings?: SimulationSettings;
+};
