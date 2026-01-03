@@ -1,3 +1,6 @@
+import { cn } from '@/common/lib/utils';
+import type { ChartConfig } from '@/common/ui/chart';
+import { ChartContainer } from '@/common/ui/chart';
 import {
   Label,
   PolarGrid,
@@ -5,9 +8,6 @@ import {
   RadialBar,
   RadialBarChart,
 } from 'recharts';
-import type { ChartConfig } from '@/common/ui/chart';
-import { ChartContainer } from '@/common/ui/chart';
-import { cn } from '@/common/lib/utils';
 
 /**
  * Props für die einzelne KPI-Radial-Komponente
@@ -38,7 +38,6 @@ export default function KPIRadialGauge({
   className,
 }: KPIRadialGaugeProps) {
   const chartData = [{ value, fill: color }];
-
   const chartConfig = {
     value: {
       label,
