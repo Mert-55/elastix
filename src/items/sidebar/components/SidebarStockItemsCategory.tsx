@@ -1,3 +1,4 @@
+import { useSimulationActions } from '@/app/controller';
 import type { MessageId } from '@/common/i18n';
 import type { CategoryAction, EditableGroupItems } from '@/common/types';
 import { EditableSidebarGroupItems } from '@/common/ui/EditableSidebarGroupItems';
@@ -5,24 +6,62 @@ import EditPriceDifferenceDialog from '@/items/sidebar/components/EditPriceDiffe
 import SidebarGroupCategory from '@/items/sidebar/components/SidebarGroupCategory';
 import StockItemActionsDropdown from '@/items/sidebar/components/StockItemActionsDropdown';
 import { usePriceSimulation } from '@/items/simulation/hooks/PriceSimulationProvider';
-import { useState } from 'react';
+import { useGetStockItemsQuery } from '@/services/hostApi';
+import { useMemo, useState } from 'react';
 
 export default function SidebarStockItemsCategory() {
   const [showPriceDifferenceDialog, setShowPriceDifferenceDialog] =
     useState(false);
+  const [selectedStockItem, setSelectedStockItem] = useState<string | null>(
+    null
+  );
   const { settings, updateSettings } = usePriceSimulation();
+  const { create } = useSimulationActions();
+  const { data: stockItemsData } = useGetStockItemsQuery({});
 
-  const handleEditPriceDifference = () => {
+  const stockItemItems: EditableGroupItems = useMemo(
+    () =>
+      stockItemsData?.items.map((item) => ({
+        title: item.itemName,
+        icon: 'boxes' as const,
+      })) ?? [],
+    [stockItemsData]
+  );
+
+  const handleEditPriceDifference = (itemTitle?: string) => {
+    setSelectedStockItem(itemTitle ?? null);
     setShowPriceDifferenceDialog(true);
   };
 
   const handleRemoveItem = () => {
-    // TODO: Implement remove item logic
+    setSelectedStockItem(null);
   };
 
   const handleSavePriceDifference = (newSettings: typeof settings) => {
     updateSettings(newSettings);
+    if (selectedStockItem) {
+      create({
+        name: `${selectedStockItem} Simulation`,
+        stockItemRef: selectedStockItem,
+        priceRange: [
+          newSettings.lowerBound,
+          newSettings.upperBound,
+          newSettings.step,
+        ],
+      });
+    }
     setShowPriceDifferenceDialog(false);
+    setSelectedStockItem(null);
+  };
+
+  const handleAddStockItem = () => {
+    setShowPriceDifferenceDialog(true);
+  };
+
+  const stockItemAction: CategoryAction = {
+    icon: 'plus',
+    label: 'dashboard.sidebar.simulations.stockItems.add',
+    onClick: handleAddStockItem,
   };
 
   return (
@@ -33,7 +72,7 @@ export default function SidebarStockItemsCategory() {
       >
         <EditableSidebarGroupItems items={stockItemItems}>
           <StockItemActionsDropdown
-            onEditPriceDifference={handleEditPriceDifference}
+            onEditPriceDifference={() => handleEditPriceDifference()}
             onRemoveItem={handleRemoveItem}
           />
         </EditableSidebarGroupItems>
@@ -41,7 +80,7 @@ export default function SidebarStockItemsCategory() {
       <EditPriceDifferenceDialog
         open={showPriceDifferenceDialog}
         onOpenChange={setShowPriceDifferenceDialog}
-        itemName="the selected stock item"
+        itemName={selectedStockItem ?? 'Stock Item'}
         onSave={handleSavePriceDifference}
         initialSettings={settings}
       />
@@ -49,33 +88,5 @@ export default function SidebarStockItemsCategory() {
   );
 }
 
-const stockItemAction: CategoryAction = {
-  icon: 'plus',
-  label: 'dashboard.sidebar.simulations.stockItems.add',
-  onClick: () => {},
-};
-
 const stockItemLabel: MessageId =
   'dashboard.sidebar.simulations.stockItems.label';
-const stockItemItems: EditableGroupItems = [
-  {
-    title: 'Untitled Simulation 1',
-    icon: 'boxes',
-  },
-  {
-    title: 'Gold Watch',
-    icon: 'boxes',
-    tooltip: {
-      id: 'dashboard.sidebar.simulations.stockItems.tooltip',
-      values: { priceDifference: '+5%' },
-    },
-  },
-  {
-    title: 'Toaster',
-    icon: 'boxes',
-    tooltip: {
-      id: 'dashboard.sidebar.simulations.stockItems.tooltip',
-      values: { priceDifference: '-15%' },
-    },
-  },
-];

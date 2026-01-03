@@ -1,3 +1,4 @@
+import { useSimulationContext } from '@/app/controller/SimulationProvider';
 import { useActiveDashboard } from '@/app/providers';
 import { useFormatText } from '@/common/hooks/useFormatText';
 import type { MessageId } from '@/common/i18n';
@@ -5,10 +6,21 @@ import { DashboardId } from '@/common/types/DashboardIds';
 
 export default function DashboardTitle() {
   const { activeDashboard } = useActiveDashboard();
+  const { activeSimulation, activeStockItemName } = useSimulationContext();
 
-  //Info: Temporal change. This will be enhanced by a follow-up issue with metadata-generated titles
   if (activeDashboard === DashboardId.Simulation) {
-    return <h1 className="text-lg font-semibold">Untitled Simulation</h1>;
+    const title = activeSimulation?.name ?? 'Untitled Simulation';
+    return (
+      <h1 className="text-lg font-semibold">
+        {title}
+        {activeStockItemName && (
+          <span className="text-muted-foreground font-normal">
+            {' : '}
+            {activeStockItemName}
+          </span>
+        )}
+      </h1>
+    );
   }
 
   return (

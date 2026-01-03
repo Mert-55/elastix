@@ -1,13 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import type { SimulationDTO } from './types/dto';
 import type {
+  CreateSimulationPayload,
+  DeleteSimulationPayload,
   StockItemsQueryParams,
   TimeSeriesQueryParams,
+  UpdateSimulationPayload,
 } from './types/payload';
 import type {
   ElasticityMetricsResponse,
   RevenueTimeSeriesResponse,
   SegmentTreeResponse,
+  SimulationMetricsResponse,
+  SimulationsListResponse,
   StockItemsResponse,
 } from './types/response';
 
@@ -21,6 +27,8 @@ export const hostApi = createApi({
     'StockItems',
     'SegmentTree',
     'RevenueTimeSeries',
+    'Simulations',
+    'SimulationMetrics',
   ],
   endpoints: (builder) => ({
     getElasticityMetrics: builder.query<ElasticityMetricsResponse, void>({
@@ -58,6 +66,64 @@ export const hostApi = createApi({
       }),
       providesTags: ['RevenueTimeSeries'],
     }),
+
+    getSimulations: builder.query<SimulationsListResponse, void>({
+      query: () => '/simulations',
+      providesTags: ['Simulations'],
+    }),
+
+    getSimulationMetrics: builder.query<SimulationMetricsResponse, string>({
+      query: (simulationId) => `/simulations/${simulationId}/metrics`,
+      providesTags: (_result, _error, simulationId) => [
+        { type: 'SimulationMetrics', id: simulationId },
+      ],
+    }),
+
+    createSimulation: builder.mutation<SimulationDTO, CreateSimulationPayload>({
+      query: (payload) => ({
+        url: '/simulations',
+        method: 'POST',
+        body: {
+          stockItemRef: payload.stockItemRef,
+          priceRange: payload.priceRange,
+          name: payload.name,
+          description: payload.description,
+        },
+      }),
+      invalidatesTags: ['Simulations'],
+    }),
+
+    updateSimulation: builder.mutation<SimulationDTO, UpdateSimulationPayload>({
+      query: ({ simulationId, ...payload }) => {
+        // Only include defined values in the body
+        const body: Record<string, unknown> = {};
+        if (payload.name !== undefined) body.name = payload.name;
+        if (payload.description !== undefined)
+          body.description = payload.description;
+        if (payload.priceRange !== undefined)
+          body.priceRange = payload.priceRange;
+        if (payload.stockItemRef !== undefined)
+          body.stockItemRef = payload.stockItemRef;
+
+        return {
+          url: `/simulations/${simulationId}`,
+          method: 'PUT',
+          body,
+        };
+      },
+      invalidatesTags: (_result, _error, { simulationId }) => [
+        'Simulations',
+        { type: 'SimulationMetrics', id: simulationId },
+      ],
+    }),
+
+    deleteSimulation: builder.mutation<void, DeleteSimulationPayload>({
+      query: ({ simulationId }) => ({
+        url: `/simulations/${simulationId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Simulations'],
+    }),
   }),
 });
 
@@ -66,4 +132,9 @@ export const {
   useGetStockItemsQuery,
   useGetSegmentTreeQuery,
   useGetRevenueTimeSeriesQuery,
+  useGetSimulationsQuery,
+  useGetSimulationMetricsQuery,
+  useCreateSimulationMutation,
+  useUpdateSimulationMutation,
+  useDeleteSimulationMutation,
 } = hostApi;
