@@ -1,5 +1,5 @@
-import { useSimulationContext } from '@/app/controller/SimulationProvider';
 import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
+import { useSimulationContext } from '@/items/simulation/controller/SimulationProvider';
 import type { PriceSimulationDataPoint } from '@/items/simulation/types/PriceSimulationData';
 import { useGetSimulationMetricsQuery } from '@/services/hostApi';
 import { createContext, useContext, useMemo, type ReactNode } from 'react';

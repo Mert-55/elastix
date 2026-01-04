@@ -1,6 +1,5 @@
 import tokens from '@/app/config/tokens';
-import { useWithToast } from '@/app/controller/hooks';
-import { useSimulationContext } from '@/app/controller/SimulationProvider';
+import { useWithToast } from '@/common/hooks';
 import { useFormatText } from '@/common/hooks/useFormatText';
 import { cn } from '@/common/lib/utils';
 import { Accordion } from '@/common/ui/accordion';
@@ -13,6 +12,7 @@ import InlineStockItemPicker from '@/items/simulation/components/InlineStockItem
 import PriceSimulationChart from '@/items/simulation/components/PriceSimulationChart';
 import { SimulationDashboardSkeleton } from '@/items/simulation/components/SimulationDashboardSkeleton';
 import SimulationMetricsPanelSection from '@/items/simulation/components/SimulationMetricsPanelSection';
+import { useSimulationContext } from '@/items/simulation/controller/SimulationProvider';
 import { usePriceSimulation } from '@/items/simulation/hooks/PriceSimulationProvider';
 import { useEffect, useMemo, useRef, useState } from 'react';
 

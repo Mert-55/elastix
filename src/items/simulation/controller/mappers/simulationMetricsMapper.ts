@@ -1,7 +1,10 @@
 import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import type { SimulationMetricsDTO } from '@/services/types/dto';
 
-import type { SimulationMetrics, SimulationSegmentMetrics } from '../types';
+import type {
+  SimulationMetrics,
+  SimulationSegmentMetrics,
+} from '@/items/simulation/types';
 
 const SEGMENT_KEY_TO_ID: Record<string, RFMSegmentIds> = {
   Champion: RFMSegmentIds.Champion,

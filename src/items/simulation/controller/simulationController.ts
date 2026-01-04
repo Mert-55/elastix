@@ -8,8 +8,8 @@ import {
   useUpdateSimulationMutation,
 } from '@/services/hostApi';
 
-import { mapSimulationMetricsFromDTO, mapSimulationsFromDTO } from '../mappers';
 import type { Simulation, SimulationMetrics } from '../types';
+import { mapSimulationMetricsFromDTO, mapSimulationsFromDTO } from './mappers';
 
 export const useSimulations = () => {
   const { data, isLoading, error, refetch } = useGetSimulationsQuery();

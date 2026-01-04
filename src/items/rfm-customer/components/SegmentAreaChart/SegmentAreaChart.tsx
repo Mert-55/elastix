@@ -7,12 +7,13 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/common/ui/chart';
+import { Skeleton } from '@/common/ui/skeleton';
 import SegmentCardHeader from '@/items/rfm-customer/components/SegmentAreaChart/SegmentCardHeader';
 import {
   getColorBySegmentId,
   rfmSegmentAreaChartConfig,
 } from '@/items/rfm-customer/config/areaChartConfig';
-import areaChartSegmentsData from '@/items/rfm-customer/model/areaChartSegmentsData';
+import { useSegmentAreaChart } from '@/items/rfm-customer/controller';
 import {
   filterByDate,
   FilterDayId,
@@ -24,27 +25,40 @@ import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 export const description =
   'Interactive RFM customer segment area chart with time range filtering';
 
-/**
- * RFMAreaChart - Displays customer segment trends over time
- *
- * Features:
- * - Stacked area chart showing all RFM segments
- * - Time range filter (7/30/90 days)
- * - Interactive tooltip and legend
- * - Gradient fills for visual distinction
- */
+function AreaChartSkeleton() {
+  return (
+    <div className="w-full h-80 p-4 flex flex-col gap-4">
+      <div className="flex gap-2">
+        <Skeleton className="w-16 h-6 rounded" />
+        <Skeleton className="w-16 h-6 rounded" />
+        <Skeleton className="w-16 h-6 rounded" />
+      </div>
+      <Skeleton className="flex-1 rounded-xl" />
+      <div className="flex justify-center gap-4">
+        <Skeleton className="w-20 h-4 rounded" />
+        <Skeleton className="w-20 h-4 rounded" />
+        <Skeleton className="w-20 h-4 rounded" />
+        <Skeleton className="w-20 h-4 rounded" />
+      </div>
+    </div>
+  );
+}
+
 export default function RFMAreaChart() {
   const [timeRange, setTimeRange] = useState<FilterDayId>(
     FilterDayId.THREE_MONTHS
   );
 
-  // Filter chart data based on selected time range
+  const { chartData, isLoading } = useSegmentAreaChart();
+
   const filteredData = useMemo(
-    () => filterByDate(areaChartSegmentsData, timeRange),
-    [timeRange]
+    () => filterByDate(chartData, timeRange),
+    [chartData, timeRange]
   );
+
   const getSegmentText = (segmentId: RFMSegmentIds): string =>
     useFormatText({ id: `${segmentId}.text` });
+
   const getRFMSegmentLabels = (): Record<RFMSegmentIds, string> => ({
     [RFMSegmentIds.Champion]: getSegmentText(RFMSegmentIds.Champion),
     [RFMSegmentIds.LoyalCustomers]: getSegmentText(
@@ -57,6 +71,18 @@ export default function RFMAreaChart() {
     [RFMSegmentIds.Hibernating]: getSegmentText(RFMSegmentIds.Hibernating),
     [RFMSegmentIds.Lost]: getSegmentText(RFMSegmentIds.Lost),
   });
+
+  if (isLoading) {
+    return (
+      <Card className="pt-0 w-full">
+        <SegmentCardHeader timeRange={timeRange} setTimeRange={setTimeRange} />
+        <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 font-mono">
+          <AreaChartSkeleton />
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card className="pt-0 w-full">
       <SegmentCardHeader timeRange={timeRange} setTimeRange={setTimeRange} />
@@ -107,7 +133,7 @@ export default function RFMAreaChart() {
               fillOpacity={0.6}
               stroke={getColorBySegmentId(RFMSegmentIds.Champion)}
               strokeWidth={2}
-              stackId="a"
+              stackId="segments"
             />
             <Area
               dataKey={RFMSegmentIds.LoyalCustomers}
@@ -116,7 +142,7 @@ export default function RFMAreaChart() {
               fillOpacity={0.6}
               stroke={getColorBySegmentId(RFMSegmentIds.LoyalCustomers)}
               strokeWidth={2}
-              stackId="b"
+              stackId="segments"
             />
             <Area
               dataKey={RFMSegmentIds.PotentialLoyalists}
@@ -125,7 +151,7 @@ export default function RFMAreaChart() {
               fillOpacity={0.6}
               stroke={getColorBySegmentId(RFMSegmentIds.PotentialLoyalists)}
               strokeWidth={2}
-              stackId="c"
+              stackId="segments"
             />
             <Area
               dataKey={RFMSegmentIds.AtRisk}
@@ -134,7 +160,7 @@ export default function RFMAreaChart() {
               fillOpacity={0.6}
               stroke={getColorBySegmentId(RFMSegmentIds.AtRisk)}
               strokeWidth={2}
-              stackId="d"
+              stackId="segments"
             />
             <Area
               dataKey={RFMSegmentIds.Hibernating}
@@ -143,7 +169,7 @@ export default function RFMAreaChart() {
               fillOpacity={0.6}
               stroke={getColorBySegmentId(RFMSegmentIds.Hibernating)}
               strokeWidth={2}
-              stackId="e"
+              stackId="segments"
             />
             <Area
               dataKey={RFMSegmentIds.Lost}
@@ -152,7 +178,7 @@ export default function RFMAreaChart() {
               fillOpacity={0.6}
               stroke={getColorBySegmentId(RFMSegmentIds.Lost)}
               strokeWidth={2}
-              stackId="f"
+              stackId="segments"
             />
             <ChartLegend content={<ChartLegendContent />} />
           </AreaChart>

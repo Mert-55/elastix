@@ -1,6 +1,5 @@
-import { useWithToast } from '@/app/controller/hooks';
-import { useSimulationContext } from '@/app/controller/SimulationProvider';
 import { useActiveDashboard } from '@/app/providers';
+import { useWithToast } from '@/common/hooks';
 import type { CategoryAction } from '@/common/types';
 import { DashboardId } from '@/common/types/DashboardIds';
 import { SidebarGroupContent, SidebarMenu } from '@/common/ui/sidebar';
@@ -9,6 +8,7 @@ import EditPriceDifferenceDialog from '@/items/sidebar/components/EditPriceDiffe
 import SidebarGroupCategory from '@/items/sidebar/components/SidebarGroupCategory';
 import SimulationActionsDropdown from '@/items/sidebar/components/SimulationActionsDropdown';
 import StockItemPickerDialog from '@/items/simulation/components/StockItemPickerDialog';
+import { useSimulationContext } from '@/items/simulation/controller/SimulationProvider';
 import { useState } from 'react';
 
 export default function SidebarSimulationsCategory() {

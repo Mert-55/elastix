@@ -1,4 +1,3 @@
-import { SimulationProvider } from '@/app/controller/SimulationProvider';
 import { ActiveDashboardProvider } from '@/app/providers/ActiveDashboardProvider';
 import { I18nProvider } from '@/app/providers/I18nProvider';
 import { StoreProvider } from '@/app/providers/StoreProvider';
@@ -6,6 +5,7 @@ import { ThemeProvider } from '@/app/providers/ThemeProvider';
 import { SidebarProvider } from '@/common/ui/sidebar';
 import { Toaster } from '@/common/ui/sonner';
 import { TooltipProvider } from '@/common/ui/tooltip';
+import { SimulationProvider } from '@/items/simulation/controller/SimulationProvider';
 import { PriceSimulationProvider } from '@/items/simulation/hooks/PriceSimulationProvider';
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => (

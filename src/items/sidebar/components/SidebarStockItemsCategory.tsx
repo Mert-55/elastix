@@ -1,10 +1,10 @@
-import { useSimulationActions } from '@/app/controller';
 import type { MessageId } from '@/common/i18n';
 import type { CategoryAction, EditableGroupItems } from '@/common/types';
 import { EditableSidebarGroupItems } from '@/common/ui/EditableSidebarGroupItems';
 import EditPriceDifferenceDialog from '@/items/sidebar/components/EditPriceDifferenceDialog';
 import SidebarGroupCategory from '@/items/sidebar/components/SidebarGroupCategory';
 import StockItemActionsDropdown from '@/items/sidebar/components/StockItemActionsDropdown';
+import { useSimulationActions } from '@/items/simulation/controller';
 import { usePriceSimulation } from '@/items/simulation/hooks/PriceSimulationProvider';
 import { useGetStockItemsQuery } from '@/services/hostApi';
 import { useMemo, useState } from 'react';
@@ -15,7 +15,7 @@ export default function SidebarStockItemsCategory() {
   const [selectedStockItem, setSelectedStockItem] = useState<string | null>(
     null
   );
-  const { settings, updateSettings } = usePriceSimulation();
+  const { settings } = usePriceSimulation();
   const { create } = useSimulationActions();
   const { data: stockItemsData } = useGetStockItemsQuery({});
 
@@ -38,7 +38,6 @@ export default function SidebarStockItemsCategory() {
   };
 
   const handleSavePriceDifference = (newSettings: typeof settings) => {
-    updateSettings(newSettings);
     if (selectedStockItem) {
       create({
         name: `${selectedStockItem} Simulation`,
