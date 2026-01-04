@@ -53,7 +53,7 @@ export default function DashboardAccordionSection({
           {title}
         </span>
       </AccordionTrigger>
-      <AccordionContent className={'overflow-hidden'}>
+      <AccordionContent className={'overflow-hidden pb-0'}>
         {children}
       </AccordionContent>
     </AccordionItem>

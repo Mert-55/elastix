@@ -1,4 +1,4 @@
-import { Checkbox } from "@/common/ui/checkbox"
+import { Checkbox } from '@/common/ui/checkbox';
 import {
   Field,
   FieldDescription,
@@ -6,7 +6,7 @@ import {
   FieldLabel,
   FieldSeparator,
   FieldSet,
-} from "@/common/ui/field"
+} from '@/common/ui/field';
 
 export default function FieldGroupExample() {
   return (
@@ -31,7 +31,7 @@ export default function FieldGroupExample() {
         <FieldSet>
           <FieldLabel>Tasks</FieldLabel>
           <FieldDescription>
-            Get notified when tasks you&apos;ve created have updates.{" "}
+            Get notified when tasks you&apos;ve created have updates.{' '}
             <a href="#">Manage tasks</a>
           </FieldDescription>
           <FieldGroup data-slot="checkbox-group">
@@ -51,5 +51,5 @@ export default function FieldGroupExample() {
         </FieldSet>
       </FieldGroup>
     </div>
-  )
+  );
 }

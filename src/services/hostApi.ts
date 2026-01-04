@@ -40,9 +40,11 @@ export const hostApi = createApi({
       query: (params) => ({
         url: '/stock-items',
         params: {
-          segment: params?.segment,
-          page: params?.page,
-          pageSize: params?.pageSize,
+          segment_filter: params?.segmentFilter,
+          query: params?.query,
+          sort_by: params?.sortBy,
+          limit: params?.limit,
+          offset: params?.offset,
         },
       }),
       providesTags: ['StockItems'],

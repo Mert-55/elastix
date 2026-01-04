@@ -35,7 +35,7 @@ export default function MetricsPanelToggleGroup({
     <ToggleGroup
       type="single"
       orientation="horizontal"
-      className="flex w-max py-3"
+      className="flex w-max py-4"
       value={value}
       onValueChange={handleValueChange}
       {...restProps}

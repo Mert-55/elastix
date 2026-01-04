@@ -1,11 +1,11 @@
-import { useWithToast } from '@/app/controller/hooks';
-import { useSimulationContext } from '@/app/controller/SimulationProvider';
 import { useActiveDashboard } from '@/app/providers';
+import { useWithToast } from '@/common/hooks';
 import { useFormatText } from '@/common/hooks/useFormatText';
 import { DashboardId } from '@/common/types/DashboardIds';
 import { Button } from '@/common/ui/button';
 import { Textarea } from '@/common/ui/textarea';
 import { useEditingState } from '@/items/dashboard/hooks/useEditingState';
+import { useSimulationContext } from '@/items/simulation/controller/SimulationProvider';
 import { useEffect, useState } from 'react';
 
 export default function EditableDashboardDescription({

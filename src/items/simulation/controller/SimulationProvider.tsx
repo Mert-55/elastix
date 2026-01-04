@@ -1,4 +1,3 @@
-import type { Simulation } from '@/app/controller/types';
 import {
   useCreateSimulationMutation,
   useDeleteSimulationMutation,
@@ -16,8 +15,9 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import type { Simulation } from '../types';
 
-import { mapSimulationsFromDTO } from '@/app/controller/mappers';
+import { mapSimulationsFromDTO } from './mappers';
 
 interface SimulationContextValue {
   simulations: Simulation[];

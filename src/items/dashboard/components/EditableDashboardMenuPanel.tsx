@@ -1,8 +1,8 @@
-import { useSimulationContext } from '@/app/controller/SimulationProvider';
 import { useActiveDashboard } from '@/app/providers';
 import { DashboardId } from '@/common/types/DashboardIds';
 import { useDashboardNameValidation } from '@/items/dashboard/hooks/useDashboardNameValidation';
 import { useEditingState } from '@/items/dashboard/hooks/useEditingState';
+import { useSimulationContext } from '@/items/simulation/controller/SimulationProvider';
 import { useEffect, useState } from 'react';
 import DashboardMenuEditMode from './DashboardMenuEditMode';
 import DashboardMenuViewMode from './DashboardMenuViewMode';

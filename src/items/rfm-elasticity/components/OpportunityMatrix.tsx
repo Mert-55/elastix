@@ -1,266 +1,18 @@
 import { useFormatText } from '@/common/hooks/useFormatText';
 import { cn } from '@/common/lib/utils';
+import { Button } from '@/common/ui/button';
 import DataGrid from '@/common/ui/data-grid';
+import { useOpportunityMatrix } from '@/items/rfm-elasticity/controller/opporunityMatrixController';
 import type {
   ElasticityType,
   OpportunityMatrixItem,
   PriceRecommendation,
 } from '@/items/rfm-elasticity/types/OpportunityMatrixItem';
-import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
+import type { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import type { ColDef, ICellRendererParams } from 'ag-grid-community';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useMemo } from 'react';
 
-/**
- * Mock-Daten für die Opportunity Matrix
- * Gefiltert nach Segment, sortiert nach Umsatzpotenzial
- */
-const mockOpportunityData: OpportunityMatrixItem[] = [
-  // Champions
-  {
-    id: '1',
-    itemName: 'Premium Organic Coffee',
-    elasticity: -0.4,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 12,
-    revenuePotential: 8.5,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.Champion,
-  },
-  {
-    id: '2',
-    itemName: 'Artisan Bread Loaf',
-    elasticity: -0.6,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 8,
-    revenuePotential: 6.2,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.Champion,
-  },
-  {
-    id: '3',
-    itemName: 'Fresh Salmon Fillet',
-    elasticity: -0.8,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 4,
-    revenuePotential: 5.1,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.Champion,
-  },
-  {
-    id: '4',
-    itemName: 'Imported Olive Oil',
-    elasticity: -0.5,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 3,
-    revenuePotential: 4.8,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.Champion,
-  },
-  {
-    id: '5',
-    itemName: 'Aged Parmesan Cheese',
-    elasticity: -0.7,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 5,
-    revenuePotential: 4.2,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.Champion,
-  },
-  {
-    id: '6',
-    itemName: 'Organic Milk',
-    elasticity: -1.2,
-    elasticityType: 'elastic',
-    purchaseFrequency: 15,
-    revenuePotential: -2.1,
-    recommendation: 'hold',
-    segmentId: RFMSegmentIds.Champion,
-  },
-  {
-    id: '7',
-    itemName: 'Free Range Eggs',
-    elasticity: -1.1,
-    elasticityType: 'elastic',
-    purchaseFrequency: 10,
-    revenuePotential: -1.5,
-    recommendation: 'hold',
-    segmentId: RFMSegmentIds.Champion,
-  },
-  {
-    id: '8',
-    itemName: 'Premium Organic Coffee',
-    elasticity: -0.4,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 12,
-    revenuePotential: 8.5,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.Champion,
-  },
-  {
-    id: '9',
-    itemName: 'Premium Organic Coffee',
-    elasticity: -0.4,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 12,
-    revenuePotential: 8.5,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.Champion,
-  },
-
-  // Loyal Customers
-  {
-    id: '10',
-    itemName: 'Whole Grain Pasta',
-    elasticity: -0.5,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 6,
-    revenuePotential: 5.5,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.LoyalCustomers,
-  },
-  {
-    id: '11',
-    itemName: 'Greek Yogurt',
-    elasticity: -0.6,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 8,
-    revenuePotential: 4.8,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.LoyalCustomers,
-  },
-  {
-    id: '12',
-    itemName: 'Almond Butter',
-    elasticity: -0.7,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 4,
-    revenuePotential: 3.9,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.LoyalCustomers,
-  },
-  {
-    id: '13',
-    itemName: 'Fresh Berries Mix',
-    elasticity: -1.3,
-    elasticityType: 'elastic',
-    purchaseFrequency: 7,
-    revenuePotential: -3.2,
-    recommendation: 'hold',
-    segmentId: RFMSegmentIds.LoyalCustomers,
-  },
-
-  // Potential Loyalists
-  {
-    id: '14',
-    itemName: 'Sparkling Water',
-    elasticity: -0.9,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 5,
-    revenuePotential: 2.8,
-    recommendation: 'hold',
-    segmentId: RFMSegmentIds.PotentialLoyalists,
-  },
-  {
-    id: '15',
-    itemName: 'Granola Bars',
-    elasticity: -1.1,
-    elasticityType: 'elastic',
-    purchaseFrequency: 4,
-    revenuePotential: -1.8,
-    recommendation: 'hold',
-    segmentId: RFMSegmentIds.PotentialLoyalists,
-  },
-  {
-    id: '16',
-    itemName: 'Protein Powder',
-    elasticity: -0.8,
-    elasticityType: 'inelastic',
-    purchaseFrequency: 2,
-    revenuePotential: 3.5,
-    recommendation: 'increase',
-    segmentId: RFMSegmentIds.PotentialLoyalists,
-  },
-
-  // At Risk
-  {
-    id: '17',
-    itemName: 'Budget Rice',
-    elasticity: -1.5,
-    elasticityType: 'elastic',
-    purchaseFrequency: 3,
-    revenuePotential: -4.5,
-    recommendation: 'discount',
-    segmentId: RFMSegmentIds.AtRisk,
-  },
-  {
-    id: '18',
-    itemName: 'Store Brand Cereal',
-    elasticity: -1.8,
-    elasticityType: 'elastic',
-    purchaseFrequency: 2,
-    revenuePotential: -5.2,
-    recommendation: 'discount',
-    segmentId: RFMSegmentIds.AtRisk,
-  },
-  {
-    id: '19',
-    itemName: 'Frozen Pizza',
-    elasticity: -1.4,
-    elasticityType: 'elastic',
-    purchaseFrequency: 4,
-    revenuePotential: -3.8,
-    recommendation: 'discount',
-    segmentId: RFMSegmentIds.AtRisk,
-  },
-
-  // Hibernating
-  {
-    id: '20',
-    itemName: 'Instant Noodles',
-    elasticity: -2.0,
-    elasticityType: 'elastic',
-    purchaseFrequency: 1,
-    revenuePotential: -6.5,
-    recommendation: 'discount',
-    segmentId: RFMSegmentIds.Hibernating,
-  },
-  {
-    id: '21',
-    itemName: 'Canned Soup',
-    elasticity: -1.6,
-    elasticityType: 'elastic',
-    purchaseFrequency: 2,
-    revenuePotential: -4.8,
-    recommendation: 'discount',
-    segmentId: RFMSegmentIds.Hibernating,
-  },
-
-  // Lost
-  {
-    id: '22',
-    itemName: 'Generic Cola',
-    elasticity: -2.5,
-    elasticityType: 'elastic',
-    purchaseFrequency: 1,
-    revenuePotential: -8.2,
-    recommendation: 'discount',
-    segmentId: RFMSegmentIds.Lost,
-  },
-  {
-    id: '23',
-    itemName: 'Budget Chips',
-    elasticity: -2.2,
-    elasticityType: 'elastic',
-    purchaseFrequency: 1,
-    revenuePotential: -7.1,
-    recommendation: 'discount',
-    segmentId: RFMSegmentIds.Lost,
-  },
-];
-
-/**
- * Badge Komponente für Elastizitäts-Anzeige
- */
 function ElasticityBadge({
   value,
   type,
@@ -359,13 +111,16 @@ export default function OpportunityMatrix({
   activeSegmentId,
   className,
 }: OpportunityMatrixProps) {
-  // Daten nach Segment filtern und nach Umsatzpotenzial sortieren
-  const filteredData = useMemo(() => {
-    if (!activeSegmentId) return [];
-    return mockOpportunityData
-      .filter((item) => item.segmentId === activeSegmentId)
-      .sort((a, b) => b.revenuePotential - a.revenuePotential);
-  }, [activeSegmentId]);
+  const {
+    items,
+    page,
+    totalPages,
+    nextPage,
+    prevPage,
+    hasNext,
+    hasPrev,
+    isFetching,
+  } = useOpportunityMatrix(activeSegmentId);
 
   // Localized column headers
   const itemNameLabel =
@@ -463,9 +218,9 @@ export default function OpportunityMatrix({
   }
 
   return (
-    <div className={cn('h-full', className)}>
+    <div className={cn('h-full flex flex-col', className)}>
       <DataGrid<OpportunityMatrixItem>
-        rowData={filteredData}
+        rowData={items}
         columnDefs={columnDefs}
         domLayout="normal"
         defaultColDef={{
@@ -474,7 +229,31 @@ export default function OpportunityMatrix({
         }}
         rowSelection="single"
         suppressCellFocus
+        isLoading={isFetching}
       />
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 pt-2 border-t">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={prevPage}
+            disabled={!hasPrev || isFetching}
+          >
+            <ChevronLeft className="h-2 w-2" />
+          </Button>
+          <span className="text-sm text-muted-foreground">
+            {page + 1} / {totalPages}
+          </span>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={nextPage}
+            disabled={!hasNext || isFetching}
+          >
+            <ChevronRight className="h-2 w-2" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

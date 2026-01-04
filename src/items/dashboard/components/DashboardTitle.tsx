@@ -1,8 +1,8 @@
-import { useSimulationContext } from '@/app/controller/SimulationProvider';
 import { useActiveDashboard } from '@/app/providers';
 import { useFormatText } from '@/common/hooks/useFormatText';
 import type { MessageId } from '@/common/i18n';
 import { DashboardId } from '@/common/types/DashboardIds';
+import { useSimulationContext } from '@/items/simulation/controller/SimulationProvider';
 
 export default function DashboardTitle() {
   const { activeDashboard } = useActiveDashboard();

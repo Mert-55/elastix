@@ -23,14 +23,22 @@ export function PriceSimulationChartSkeleton() {
  */
 export function SimulationMetricsSkeleton() {
   return (
-    <div className="grid grid-cols-2 gap-4">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <div key={i} className="space-y-2 p-4 rounded-xl border bg-card">
-          <Skeleton className="h-4 w-24" />
-          <Skeleton className="h-8 w-32" />
-          <Skeleton className="h-3 w-16" />
-        </div>
-      ))}
+    <div className="grid grid-cols-2 grid-rows-2 gap-4">
+      <div className="space-y-2 row-span-1 p-4 rounded-xl border bg-card">
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="h-8 w-32" />
+        <Skeleton className="h-3 w-16" />
+      </div>
+      <div className="space-y-2 row-span-2 p-4 rounded-xl border bg-card">
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="h-8 w-32" />
+        <Skeleton className="h-3 w-16" />
+      </div>
+      <div className="space-y-2 row-span-1 p-4 rounded-xl border bg-card">
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="h-8 w-32" />
+        <Skeleton className="h-3 w-16" />
+      </div>
     </div>
   );
 }

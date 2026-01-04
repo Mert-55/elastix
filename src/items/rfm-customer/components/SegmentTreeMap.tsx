@@ -11,6 +11,7 @@ import type { MessageId } from '@/common/i18n';
 import { cn } from '@/common/lib/utils';
 import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 
+import { getColorBySegmentId } from '../config/areaChartConfig';
 import {
   chartConfig,
   LABEL_SKIP_SIZE,
@@ -19,10 +20,7 @@ import {
 } from '../config/treeMapConfig';
 import { getTreeMapDefs } from '../config/treeMapDefs';
 import type { SegmentData, TreeMapNode } from '../types/SegmentTreeMapData';
-import {
-  getSegmentColor,
-  transformToTreeMapData,
-} from '../types/SegmentTreeMapData';
+import { transformToTreeMapData } from '../types/SegmentTreeMapData';
 import { SegmentTreeMapTooltip } from './SegmentTreeMapTooltip';
 import { TreeMapHoveredLayer } from './TreeMapHoveredLayer';
 import { TreeMapNodeComponent } from './TreeMapNodeComponent';
@@ -57,13 +55,8 @@ export default function SegmentTreeMap({
   const treeMapData = useMemo(() => transformToTreeMapData(data), [data]);
 
   const getColor = (node: ComputedNodeWithoutStyles<TreeMapNode>) => {
-    if (node.data.id === RFMSegmentIds.Lost) {
-      return 'var(--muted)';
-    }
-    if (node.data.score !== undefined) {
-      return getSegmentColor(node.data.score);
-    }
-    return 'var(--muted)';
+    // Use segment-specific colors based on segment ID
+    return getColorBySegmentId(node.data.id as RFMSegmentIds);
   };
 
   return (

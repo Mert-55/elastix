@@ -1,4 +1,3 @@
-import { useSimulationContext } from '@/app/controller/SimulationProvider';
 import { Card } from '@/common/ui/card';
 import { Slider } from '@/common/ui/slider';
 import type { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
@@ -6,6 +5,7 @@ import MetricsPanelInteractivePieChart from '@/items/simulation/components/Metri
 import MetricsPanelSegmentBarChart from '@/items/simulation/components/MetricsPanelSegmentBarChart';
 import MetricsPanelStackedRadialChart from '@/items/simulation/components/MetricsPanelStackedRadialChart';
 import MetricsPanelToggleGroup from '@/items/simulation/components/MetricsPanelToggleGroup';
+import { useSimulationContext } from '@/items/simulation/controller/SimulationProvider';
 import type { MetricsMode } from '@/items/simulation/types';
 import { useState } from 'react';
 import MetricsDisplay from './MetricsDisplay';

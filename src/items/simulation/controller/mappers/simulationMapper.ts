@@ -1,6 +1,6 @@
 import type { SimulationDTO } from '@/services/types/dto';
 
-import type { Simulation } from '../types';
+import type { Simulation } from '@/items/simulation/types';
 
 export const mapSimulationFromDTO = (dto: SimulationDTO): Simulation => ({
   id: dto.simulationId,
