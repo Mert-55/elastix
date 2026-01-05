@@ -16,7 +16,7 @@
 ## Segment Elasticity Simulation
 
 <p align="center">
-  <img src="docs/simulation.png" alt="elastix Dashboard Simulation" width="800"/>
+  <img src="docs/simulation.gif" alt="elastix Dashboard Simulation" width="800"/>
 </p>
 
 ## 🎯 What is elastix?
