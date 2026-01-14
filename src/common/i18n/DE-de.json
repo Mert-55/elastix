@@ -142,5 +142,6 @@
   "simulation.sidebar.actions.delete": "Simulation löschen",
   "simulation.stockItemPicker.title": "Artikel auswählen",
   "simulation.stockItemPicker.description": "Wählen Sie einen Artikel für die Preissimulation aus.",
+  "simulation.stockItemPicker.searchPlaceholder": "Nach Name oder SKU suchen...",
   "common.select": "Auswählen"
 }

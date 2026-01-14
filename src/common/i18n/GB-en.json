@@ -142,5 +142,6 @@
   "simulation.sidebar.actions.delete": "Delete Simulation",
   "simulation.stockItemPicker.title": "Select Stock Item",
   "simulation.stockItemPicker.description": "Choose a stock item to simulate price changes for.",
+  "simulation.stockItemPicker.searchPlaceholder": "Search by name or SKU...",
   "common.select": "Select"
 }

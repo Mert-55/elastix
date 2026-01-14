@@ -16,6 +16,16 @@ const FILTER_DAY_MAP: Record<FilterDayId, number> = {
   [FilterDayId.WEEK]: 7,
 };
 
+/**
+ * Parses a date string in DD/MM/YYYY format and returns a Date object.
+ * @param dateStr - Date string in DD/MM/YYYY format
+ * @returns Parsed Date object
+ */
+export function parseDDMMYYYY(dateStr: string): Date {
+  const [day, month, year] = dateStr.split('/').map(Number);
+  return new Date(year, month - 1, day);
+}
+
 export function filterByDate(
   chartData: SegmentAreaChartNode[],
   timeRange: FilterDayId = FilterDayId.THREE_MONTHS
@@ -23,16 +33,16 @@ export function filterByDate(
   if (chartData.length === 0) return [];
 
   const sortedData = [...chartData].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    (a, b) => parseDDMMYYYY(a.date).getTime() - parseDDMMYYYY(b.date).getTime()
   );
 
-  const latestDate = new Date(sortedData[sortedData.length - 1].date);
+  const latestDate = parseDDMMYYYY(sortedData[sortedData.length - 1].date);
   const daysToSubtract = FILTER_DAY_MAP[timeRange];
   const startDate = new Date(latestDate);
   startDate.setDate(startDate.getDate() - daysToSubtract);
 
   return sortedData.filter((node) => {
-    const date = new Date(node.date);
+    const date = parseDDMMYYYY(node.date);
     return date >= startDate && date <= latestDate;
   });
 }

@@ -17,6 +17,7 @@ import { useSegmentAreaChart } from '@/items/rfm-customer/controller';
 import {
   filterByDate,
   FilterDayId,
+  parseDDMMYYYY,
 } from '@/items/rfm-customer/types/FilterDayId';
 import { RFMSegmentIds } from '@/items/rfm-elasticity/types/RFMSegmentId';
 import { useMemo, useState } from 'react';
@@ -103,7 +104,7 @@ export default function RFMAreaChart() {
               tickMargin={8}
               minTickGap={32}
               tickFormatter={(value) => {
-                const date = new Date(value);
+                const date = parseDDMMYYYY(value);
                 return date.toLocaleDateString('en-US', {
                   month: 'short',
                   day: 'numeric',
@@ -116,7 +117,7 @@ export default function RFMAreaChart() {
               content={
                 <ChartTooltipContent
                   labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString('en-US', {
+                    return parseDDMMYYYY(value).toLocaleDateString('en-US', {
                       month: 'numeric',
                       day: 'numeric',
                       year: 'numeric',

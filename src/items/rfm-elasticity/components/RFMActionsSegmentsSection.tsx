@@ -20,6 +20,7 @@ export default function RFMActionsSegmentsSection() {
         <DashboardAccordionSection
           value="item-actions"
           titleTranslatable="rfm.accordion.action.title"
+          className="pb-2"
         >
           <RFMSimulationActionItem />
         </DashboardAccordionSection>
