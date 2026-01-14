@@ -7,6 +7,10 @@
 [![Vite](https://img.shields.io/badge/Vite-5+-purple.svg)](https://vitejs.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+## Live Demo
+*Elastix* - https://elastix.vercel.app/
+*Elastix-Api* - https://elastix-api.onrender.com/docs
+
 ## Dashboard Preview
 
 <p align="center">
