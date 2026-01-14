@@ -14,7 +14,7 @@ import { Skeleton } from '@/common/ui/skeleton';
 import { useGetStockItemsQuery } from '@/services/hostApi';
 import type { StockItemDTO } from '@/services/types/dto';
 import type { ColDef, RowClickedEvent } from 'ag-grid-community';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // Debounce delay in milliseconds
 const SEARCH_DEBOUNCE_MS = 300;
@@ -49,13 +49,8 @@ export default function InlineStockItemPicker({
     id: 'simulation.stockItemPicker.searchPlaceholder',
   });
 
-  // Sort by revenue descending
-  const stockItems = useMemo(() => {
-    const items = data?.items ?? [];
-    return [...items].sort(
-      (a, b) => (b.revenuePotential ?? 0) - (a.revenuePotential ?? 0)
-    );
-  }, [data]);
+  // Server already returns items sorted by revenue_desc (relevance)
+  const stockItems = data?.items ?? [];
 
   const handleRowClicked = useCallback(
     (event: RowClickedEvent<StockItemDTO>) => {

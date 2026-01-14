@@ -17,11 +17,25 @@ import type {
   StockItemsResponse,
 } from './types/response';
 
+// Cache durations in seconds
+const CACHE_TIME = {
+  /** Stock items rarely change - cache for 15 minutes */
+  STOCK_ITEMS: 900,
+  /** Simulations may be edited - cache for 15 minutes */
+  SIMULATIONS: 900,
+  /** Simulation metrics are computed - cache for 15 minutes */
+  SIMULATION_METRICS: 900,
+  /** Dashboard data - cache for 15 minutes */
+  DASHBOARD: 900,
+} as const;
+
 export const hostApi = createApi({
   reducerPath: 'hostApi',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000',
   }),
+  // Default: keep unused data in cache for 60 seconds
+  keepUnusedDataFor: 60,
   tagTypes: [
     'ElasticityMetrics',
     'StockItems',
@@ -34,6 +48,7 @@ export const hostApi = createApi({
     getElasticityMetrics: builder.query<ElasticityMetricsResponse, void>({
       query: () => '/dashboard/kpis',
       providesTags: ['ElasticityMetrics'],
+      keepUnusedDataFor: CACHE_TIME.DASHBOARD,
     }),
 
     getStockItems: builder.query<StockItemsResponse, StockItemsQueryParams>({
@@ -42,17 +57,20 @@ export const hostApi = createApi({
         params: {
           segment_filter: params?.segmentFilter,
           query: params?.query,
-          sort_by: params?.sortBy,
+          // Default to revenue_desc for relevance-based sorting
+          sort_by: params?.sortBy ?? 'revenue_desc',
           limit: params?.limit,
           offset: params?.offset,
         },
       }),
       providesTags: ['StockItems'],
+      keepUnusedDataFor: CACHE_TIME.STOCK_ITEMS,
     }),
 
     getSegmentTree: builder.query<SegmentTreeResponse, void>({
       query: () => '/dashboard/segments',
       providesTags: ['SegmentTree'],
+      keepUnusedDataFor: CACHE_TIME.DASHBOARD,
     }),
 
     getRevenueTimeSeries: builder.query<
@@ -67,11 +85,13 @@ export const hostApi = createApi({
         },
       }),
       providesTags: ['RevenueTimeSeries'],
+      keepUnusedDataFor: CACHE_TIME.DASHBOARD,
     }),
 
     getSimulations: builder.query<SimulationsListResponse, void>({
       query: () => '/simulations',
       providesTags: ['Simulations'],
+      keepUnusedDataFor: CACHE_TIME.SIMULATIONS,
     }),
 
     getSimulationMetrics: builder.query<SimulationMetricsResponse, string>({
@@ -79,6 +99,8 @@ export const hostApi = createApi({
       providesTags: (_result, _error, simulationId) => [
         { type: 'SimulationMetrics', id: simulationId },
       ],
+      // Simulation metrics are expensive to compute - cache longer
+      keepUnusedDataFor: CACHE_TIME.SIMULATION_METRICS,
     }),
 
     createSimulation: builder.mutation<SimulationDTO, CreateSimulationPayload>({
